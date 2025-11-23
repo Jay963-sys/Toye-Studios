@@ -15,12 +15,12 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Toye Studios: Fine Art, Portraits, Sketches, Photography, and Creative Art Teaching.",
   icons: {
-    icon: "/brand/logo1.svg",
+    icon: "/brand/pp.svg",
   },
   openGraph: {
     title: "Toye Studios",
     description: "Art • Teaching • Photography",
-    images: ["/brand/logo1.svg"],
+    images: ["/brand/let.png"],
   },
 };
 

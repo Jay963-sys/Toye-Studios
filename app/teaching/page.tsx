@@ -73,11 +73,11 @@ const CLASSES: ClassType[] = [
 ];
 
 const CATEGORIES = [
-  "All",
-  "Beginner",
-  "Intermediate",
-  "Advanced",
-  "Professional",
+  ".",
+  // "Beginner",
+  // "Intermediate",
+  // "Advanced",
+  // "Professional",
 ];
 
 export default function TeachingPage() {
