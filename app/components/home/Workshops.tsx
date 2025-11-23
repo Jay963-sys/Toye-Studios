@@ -241,6 +241,28 @@ export default function Workshops() {
               exit={{ scale: 0.9, y: 50 }}
               onClick={(e) => e.stopPropagation()}
             >
+              <button
+                className="md:hidden absolute top-3 left-3 z-20
+             w-10 h-10 rounded-full bg-white/15 backdrop-blur-sm
+             flex items-center justify-center
+             text-white active:scale-95 transition-all"
+                onClick={() => setSelectedWorkshop(null)}
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
               <div className="grid md:grid-cols-2 gap-0">
                 <div className="relative aspect-square md:aspect-auto">
                   <Image
@@ -281,7 +303,7 @@ export default function Workshops() {
                         setSelectedWorkshop(null);
                         scrollToForm(selectedWorkshop.title);
                       }}
-                      className="w-full py-4 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
+                      className="w-full py-4 rounded-full bg-gradient-to-r from-gray-700 to-gray-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
                     >
                       Book This Workshop
                     </button>
