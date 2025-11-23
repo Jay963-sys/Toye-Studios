@@ -1,0 +1,107 @@
+.artcurator-container {
+  position: relative;
+  z-index: 10;
+}
+
+.artcurator-container h2 {
+  position: relative;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #c6d1d1;
+}
+
+.artcurator-container h2::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 49, 0, 0.15) 0%,
+    transparent 70%
+  );
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.artcurator-container p {
+  font-size: 1rem;
+  color: #e5e5e5;
+  line-height: 1.75rem;
+}
+
+.artcurator-container .relative {
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.artcurator-container .relative:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.artcurator-container .relative::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.35), transparent);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.artcurator-container h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.artcurator-container p {
+  color: #cccccc;
+  font-size: 0.95rem;
+  line-height: 1.6rem;
+}
+
+@media (max-width: 1024px) {
+  .artcurator-container .flex {
+    flex-direction: column;
+  }
+
+  .artcurator-container .lg\:w-1\/2 {
+    width: 100% !important;
+  }
+}
+
+/* Floating film cut divider */
+.artcurator-divider {
+  width: 60px; /* Short cinematic line */
+  height: 2px; /* Thin line */
+  background: #ff3100; /* Brand accent */
+  margin: 3rem auto; /* Centered with spacing */
+  position: relative;
+  overflow: hidden;
+}
+
+.artcurator-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, #ff3100, transparent);
+  animation: filmCut 1.2s ease-in-out infinite;
+}
+
+@keyframes filmCut {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}

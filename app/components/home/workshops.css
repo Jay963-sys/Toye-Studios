@@ -1,0 +1,141 @@
+/* Section wrapper */
+.showcase-container {
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  position: relative;
+}
+
+/* Spotlight container */
+.showcase-spotlight {
+  position: relative;
+  width: 92%;
+  max-width: 950px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Main image */
+.spotlight-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* Dark fade at bottom */
+.spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 35%, #000 80%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Soft white vignette glow */
+.white-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.15),
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  z-index: 2;
+}
+
+/* Floating text */
+.enhanced-spotlight-title {
+  position: absolute;
+  bottom: 18%;
+  left: 7%;
+  z-index: 5;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 70, 0, 0.5);
+  pointer-events: none;
+}
+
+/********************
+ *   Description
+ ********************/
+.showcase-description {
+  max-width: 850px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.desc-heading {
+  font-size: 2.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-family: "Georgia", serif;
+}
+
+.desc-text {
+  color: #d6d6d6;
+  font-size: 1.1rem;
+  line-height: 1.75rem;
+}
+
+.desc-bullets {
+  color: #f0f0f0;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+}
+
+/********************
+ *   Fade-In Animation
+ ********************/
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.9s ease-out forwards;
+}
+
+.animate-fade-in-up.delay-150 {
+  animation-delay: 0.12s;
+}
+
+.animate-fade-in-up.delay-300 {
+  animation-delay: 0.24s;
+}
+
+/********************
+ *   Mobile Tweaks
+ ********************/
+@media (max-width: 768px) {
+  .enhanced-spotlight-title {
+    bottom: 14%;
+    left: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .enhanced-spotlight-title {
+    bottom: 12%;
+    left: 4%;
+    text-align: left;
+  }
+
+  .showcase-container {
+    gap: 60px;
+  }
+
+  .desc-text {
+    font-size: 1rem;
+  }
+}
