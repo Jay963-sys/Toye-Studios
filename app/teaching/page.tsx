@@ -25,7 +25,7 @@ const CLASSES: ClassType[] = [
     duration: "6 weeks",
     students: "Max 12",
     skills: ["Line work", "Shading", "Perspective", "Composition"],
-    price: "Starting at $299",
+    price: "Starting at £299",
   },
   {
     title: "Creative Workshop",
@@ -41,7 +41,7 @@ const CLASSES: ClassType[] = [
       "Experimentation",
       "Style development",
     ],
-    price: "Starting at $399",
+    price: "Starting at £399",
   },
   {
     title: "Photography Session",
@@ -52,7 +52,7 @@ const CLASSES: ClassType[] = [
     duration: "4 weeks",
     students: "Max 8",
     skills: ["Lighting", "Composition", "Post-processing", "Storytelling"],
-    price: "Starting at $499",
+    price: "Starting at £499",
   },
   {
     title: "Brand Collaboration",

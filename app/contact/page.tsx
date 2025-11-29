@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaInstagram, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
+import BookingForm from "../components/BookingForm";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -220,188 +221,18 @@ export default function ContactPage() {
 
       {/* Main Content Grid */}
       <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 mb-16">
-        {/* Contact Form - Takes 3 columns */}
-        <motion.div
-          className="lg:col-span-3"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          <div className="relative bg-gradient-to-br from-black-800/50 to-black-900/50 border border-black/10 rounded-3xl p-8 sm:p-10 backdrop-blur-lg shadow-xl overflow-hidden">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30" />
-
-            <div className="relative z-10">
-              <h2 className="text-3xl font-serif mb-2">Send a Message</h2>
-              <p className="text-gray-400 mb-8">
-                Fill out the form below and I&apos;ll get back to you within 24
-                hours.
-              </p>
-
-              {submitted && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 rounded-xl bg-green-500/20 border border-green-500/50 text-green-300"
-                >
-                  <div className="flex items-center gap-2">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>
-                      Message sent successfully! I&apos;ll get back to you soon.
-                    </span>
-                  </div>
-                </motion.div>
-              )}
-
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="relative">
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
-                      Your Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder=""
-                      value={form.name}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField("name")}
-                      onBlur={() => setFocusedField(null)}
-                      className={`w-full bg-black/40 px-4 py-3 rounded-xl border text-white outline-none transition-all duration-300 ${
-                        focusedField === "name"
-                          ? "border-blue-500/50 shadow-lg shadow-blue-500/20"
-                          : "border-white/10 hover:border-white/20"
-                      }`}
-                    />
-                  </div>
-
-                  <div className="relative">
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder=""
-                      value={form.email}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField("email")}
-                      onBlur={() => setFocusedField(null)}
-                      className={`w-full bg-black/40 px-4 py-3 rounded-xl border text-white outline-none transition-all duration-300 ${
-                        focusedField === "email"
-                          ? "border-blue-500/50 shadow-lg shadow-blue-500/20"
-                          : "border-white/10 hover:border-white/20"
-                      }`}
-                    />
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
-                    Subject *
-                  </label>
-                  <select
-                    name="subject"
-                    value={form.subject}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("subject")}
-                    onBlur={() => setFocusedField(null)}
-                    className={`w-full bg-black/40 px-4 py-3 rounded-xl border text-white outline-none transition-all duration-300 ${
-                      focusedField === "subject"
-                        ? "border-blue-500/50 shadow-lg shadow-blue-500/20"
-                        : "border-white/10 hover:border-white/20"
-                    }`}
-                  >
-                    <option value="" disabled>
-                      Select inquiry type
-                    </option>
-                    {INQUIRY_TYPES.map((type, idx) => (
-                      <option key={idx} value={type} className="bg-zinc-900">
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-400 mb-2">
-                    Your Message *
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={6}
-                    placeholder=""
-                    value={form.message}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("message")}
-                    onBlur={() => setFocusedField(null)}
-                    className={`w-full bg-black/40 px-4 py-3 rounded-xl border text-white outline-none transition-all duration-300 resize-none ${
-                      focusedField === "message"
-                        ? "border-blue-500/50 shadow-lg shadow-blue-500/20"
-                        : "border-white/10 hover:border-white/20"
-                    }`}
-                  />
-                </div>
-
-                <button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-gray-500 to-gray-700 rounded-full text-white font-medium hover:shadow-lg hover:shadow-gray-500/50 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                          fill="none"
-                        />
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        />
-                      </svg>
-                      Sending...
-                    </span>
-                  ) : (
-                    <span className="flex items-center justify-center gap-2">
-                      Send Message
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
-                    </span>
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        <div className="lg:col-span-3">
+          <BookingForm
+            services={[
+              "General Inquiry",
+              "Commission Request",
+              "Workshop/Class",
+              "Collaboration",
+              "Exhibition/Curation",
+              "Other",
+            ]}
+          />
+        </div>
 
         {/* Sidebar - Takes 2 columns */}
         <motion.div

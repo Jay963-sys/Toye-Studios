@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
+import BookingForm from "../BookingForm";
 
 type Workshop = {
   title: string;
@@ -20,7 +21,7 @@ const WORKSHOPS: Workshop[] = [
     desc: "Master foundations of line, form and proportion. Perfect for beginners.",
     img: "/brand/46.png",
     duration: "6 weeks",
-    price: "$299",
+    price: "£299",
     level: "Beginner",
     spots: "12 spots left",
   },
@@ -29,7 +30,7 @@ const WORKSHOPS: Workshop[] = [
     desc: "Explore your artistic voice through mixed media and experimentation.",
     img: "/brand/get.png",
     duration: "8 weeks",
-    price: "$399",
+    price: "£399",
     level: "Intermediate",
     spots: "8 spots left",
   },
@@ -38,7 +39,7 @@ const WORKSHOPS: Workshop[] = [
     desc: "Capture unique moments with professional lighting and composition.",
     img: "/brand/let.png",
     duration: "4 weeks",
-    price: "$499",
+    price: "£499",
     level: "Advanced",
     spots: "6 spots left",
   },
@@ -316,196 +317,17 @@ export default function Workshops() {
       </AnimatePresence>
 
       {/* Booking Form Section */}
-      <motion.div
-        id="booking-form"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative bg-gradient-to-br from-black-900/50 to-black-900/50 border border-white/1 rounded-3xl p-8 sm:p-12 backdrop-blur-lg shadow-xl overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30" />
-
-        <div className="relative z-10">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-3xl sm:text-4xl font-serif text-center mb-3">
-              Ready to Get Started?
-            </h3>
-            <p className="text-gray-400 text-center mb-10 text-base sm:text-lg">
-              Book your spot today or request a custom service. We&apos;ll
-              respond within 24 hours.
-            </p>
-
-            {submitted && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-8 p-4 rounded-xl bg-green-500/20 border border-green-500/50 text-green-300"
-              >
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span>Request submitted! We&apos;ll be in touch soon.</span>
-                </div>
-              </motion.div>
-            )}
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">
-                  Your Name *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  onFocus={() => setFocusedField("name")}
-                  onBlur={() => setFocusedField(null)}
-                  placeholder=""
-                  className={`w-full bg-black/40 px-4 py-3 rounded-xl border text-white outline-none transition-all duration-300 ${
-                    focusedField === "name"
-                      ? "border-purple-500/50 shadow-lg shadow-purple-500/20"
-                      : "border-white/10 hover:border-white/20"
-                  }`}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  onFocus={() => setFocusedField("email")}
-                  onBlur={() => setFocusedField(null)}
-                  placeholder=""
-                  className={`w-full bg-black/40 px-4 py-3 rounded-xl border text-white outline-none transition-all duration-300 ${
-                    focusedField === "email"
-                      ? "border-purple-500/50 shadow-lg shadow-purple-500/20"
-                      : "border-white/10 hover:border-white/20"
-                  }`}
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-400 mb-2">
-                  Select Workshop/Service *
-                </label>
-                <select
-                  name="service"
-                  value={form.service}
-                  onChange={handleChange}
-                  onFocus={() => setFocusedField("service")}
-                  onBlur={() => setFocusedField(null)}
-                  className={`w-full bg-black/40 px-4 py-3 rounded-xl border text-white outline-none transition-all duration-300 ${
-                    focusedField === "service"
-                      ? "border-purple-500/50 shadow-lg shadow-purple-500/20"
-                      : "border-white/10 hover:border-white/20"
-                  }`}
-                >
-                  <option value="" disabled>
-                    Choose a service...
-                  </option>
-                  <option value="Drawing Basics">
-                    Drawing Basics Workshop
-                  </option>
-                  <option value="Creative Workshop">Creative Workshop</option>
-                  <option value="Photography Session">
-                    Photography Session
-                  </option>
-                  <option value="Brand Collaboration">
-                    Brand Collaboration
-                  </option>
-                  <option value="portrait">Portrait Commission</option>
-                  <option value="other">Other / Custom Request</option>
-                </select>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-400 mb-2">
-                  Additional Details
-                </label>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  onFocus={() => setFocusedField("message")}
-                  onBlur={() => setFocusedField(null)}
-                  rows={4}
-                  placeholder=""
-                  className={`w-full bg-black/40 px-4 py-3 rounded-xl border text-white outline-none transition-all duration-300 resize-none ${
-                    focusedField === "message"
-                      ? "border-gray-500/50 shadow-lg shadow-gray-500/20"
-                      : "border-white/10 hover:border-white/20"
-                  }`}
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-zinc-900 to-zinc-900 rounded-full text-white font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                          fill="none"
-                        />
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        />
-                      </svg>
-                      Processing...
-                    </span>
-                  ) : (
-                    <span className="flex items-center justify-center gap-2">
-                      Submit Request
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
-                    </span>
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+      <BookingForm
+        initialService={selectedWorkshop?.title ?? ""}
+        services={[
+          "Drawing Basics",
+          "Creative Workshop",
+          "Photography Session",
+          "Brand Collaboration",
+          "Portrait Commission",
+          "Other / Custom Request",
+        ]}
+      />
     </section>
   );
 }
