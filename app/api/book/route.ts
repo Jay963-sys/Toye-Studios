@@ -182,7 +182,7 @@ export async function POST(req: Request) {
     // Optionally: return bookingRef to frontend
     return NextResponse.json(
       {
-        message: "Request sent. Check your email for confirmation.",
+        message: "",
         bookingRef,
       },
       { status: 200 }
