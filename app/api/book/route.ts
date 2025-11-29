@@ -165,7 +165,7 @@ export async function POST(req: Request) {
 
     // Send owner notification (to EMAIL_TO)
     await transporter.sendMail({
-      from: `"Booking Bot" <${process.env.EMAIL_USER}>`,
+      from: `"Toye Studios" <booking@no-reply.com>`,
       to: process.env.EMAIL_TO,
       subject: `New booking: ${bookingRef} — ${service}`,
       html: ownerHtml,
@@ -173,7 +173,7 @@ export async function POST(req: Request) {
 
     // Send confirmation to user
     await transporter.sendMail({
-      from: `"${process.env.EMAIL_USER}" <${process.env.EMAIL_USER}>`,
+      from: `"Toye Studios" <no-reply@toyestudios.co.uk>`,
       to: email,
       subject: `Booking request received — ${bookingRef}`,
       html: userHtml,
