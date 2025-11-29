@@ -325,7 +325,6 @@ export default function Workshops() {
           "Photography Session",
           "Brand Collaboration",
           "Portrait Commission",
-          "Other / Custom Request",
         ]}
       />
     </section>

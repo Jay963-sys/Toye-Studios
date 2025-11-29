@@ -229,7 +229,6 @@ export default function ContactPage() {
               "Workshop/Class",
               "Collaboration",
               "Exhibition/Curation",
-              "Other",
             ]}
           />
         </div>
