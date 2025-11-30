@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaInstagram, FaYoutube, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaTwitter, FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -38,16 +38,16 @@ export default function Footer() {
             </h4>
 
             <div className="flex items-center gap-5 text-xl">
-              <SocialIcon href="#">
+              <SocialIcon href="https://www.instagram.com/toye.studios/">
                 <FaInstagram />
               </SocialIcon>
-              <SocialIcon href="#">
-                <FaYoutube />
+              <SocialIcon href="https://www.facebook.com/toye.pencils">
+                <FaFacebook />
               </SocialIcon>
-              <SocialIcon href="#">
+              <SocialIcon href="https://www.twitter.com/toye.studios/">
                 <FaTwitter />
               </SocialIcon>
-              <SocialIcon href="mailto:info@toye.studio">
+              <SocialIcon href="mailto:omomamatoye@gmail.com">
                 <FaEnvelope />
               </SocialIcon>
             </div>

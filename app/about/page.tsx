@@ -25,8 +25,8 @@ export default function AboutPage() {
     { src: "/brand/m.png", alt: "Art Exhibition", caption: "Exhibition Day" },
     {
       src: "/brand/98.png",
-      alt: "Live Art Session",
-      caption: "Live Art Session",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
     },
   ];
 

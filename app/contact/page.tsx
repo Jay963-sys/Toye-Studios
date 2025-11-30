@@ -2,8 +2,15 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { FaInstagram, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaTwitter,
+  FaLinkedin,
+  FaFacebook,
+  FaEnvelope,
+} from "react-icons/fa";
 import BookingForm from "../components/BookingForm";
+import { FaE } from "react-icons/fa6";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -120,25 +127,25 @@ export default function ContactPage() {
     {
       icon: <FaInstagram />,
       name: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/toye.studios/",
       color: "from-gray-700 to-gray-500",
     },
     {
       icon: <FaTwitter />,
       name: "Twitter",
-      href: "#",
+      href: "https://www.twitter.com/toye.studios/",
       color: "from-blue-400 to-blue-600",
     },
     {
-      icon: <FaLinkedin />,
-      name: "LinkedIn",
-      href: "#",
+      icon: <FaEnvelope />,
+      name: "Email",
+      href: "mailto:omomamatoye@gmail.com",
       color: "from-blue-600 to-blue-800",
     },
     {
       icon: <FaFacebook />,
       name: "Facebook",
-      href: "#",
+      href: "https://www.facebook.com/toye.pencils",
       color: "from-blue-500 to-blue-700",
     },
   ];
