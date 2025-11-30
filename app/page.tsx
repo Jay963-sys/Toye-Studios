@@ -82,7 +82,7 @@ export default function HomePage() {
       <FeaturedWorks />
       <Photography />
       <PhotographyServices />
-      <ArtCurator />
+      {/* <ArtCurator /> */}
       <Workshops />
     </div>
   );

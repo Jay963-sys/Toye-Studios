@@ -22,6 +22,12 @@ export default function AboutPage() {
       alt: "Community Engagement",
       caption: "Teaching & sharing",
     },
+    { src: "/brand/m.png", alt: "Art Exhibition", caption: "Exhibition Day" },
+    {
+      src: "/brand/98.png",
+      alt: "Live Art Session",
+      caption: "Live Art Session",
+    },
   ];
 
   const TIMELINE = [
