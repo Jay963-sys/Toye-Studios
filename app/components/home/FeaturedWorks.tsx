@@ -18,23 +18,12 @@ const SAMPLE_WORKS: Work[] = [
     year: "2023",
   },
   { title: "Sketch", image: "/brand/a.png", medium: "Ink", year: "2022" },
-  {
-    title: "Mood Light",
-    image: "/brand/21.png",
-    medium: "Pencil",
-    year: "2023",
-  },
+
   {
     title: "Charcoal Study",
     image: "/brand/d.png",
     medium: "Pencil",
     year: "2022",
-  },
-  {
-    title: "Portrait Study",
-    image: "/brand/e.png",
-    medium: "Pencil",
-    year: "2023",
   },
 ];
 
