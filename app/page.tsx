@@ -8,6 +8,9 @@ import Workshops from "./components/home/Workshops";
 import Photography from "./components/home/Photography";
 import PhotographyServices from "./components/home/PhotographyServices";
 import ArtCurator from "./components/home/ArtCurator";
+import PortraitArtistSection from "./components/home/PortraitArtistSection";
+import PhotographySection from "./components/home/PhotographySection";
+import CuratedEventsSection from "./components/home/CuratedEventsSection";
 
 export default function HomePage() {
   return (
@@ -79,11 +82,14 @@ export default function HomePage() {
 
       <CinematicIntro />
       <Showcase />
-      <FeaturedWorks />
-      <Photography />
-      <PhotographyServices />
+      {/* <PortraitArtistSection /> */}
+      <PhotographySection />
+      <CuratedEventsSection />
+      {/* <FeaturedWorks /> */}
+      {/* <Photography /> */}
+      {/* <PhotographyServices /> */}
       {/* <ArtCurator /> */}
-      <Workshops />
+      {/* <Workshops /> */}
     </div>
   );
 }
