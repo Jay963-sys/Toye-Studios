@@ -5,9 +5,9 @@ import { useState } from "react";
 
 const EVENT_IMAGES = [
   { src: "/brand/98.png", title: "Sip & Paint Event" },
-  { src: "/brand/m.png", title: "Paint with Olatoye Series" },
+  { src: "/brand/888.png", title: "Paint with Olatoye Series" },
   { src: "/brand/n.png", title: "Community Workshop" },
-  { src: "/brand/o.png", title: "Creative Experience" },
+  { src: "/brand/777.png", title: "Creative Experience" },
 ];
 
 export default function CuratedEvents() {

@@ -10,24 +10,29 @@ export default function Showcase() {
   const [showClasses, setShowClasses] = useState(false);
 
   const images = [
-    "/brand/pop.png",
+    "/brand/p.png",
     "/brand/b.png",
     "/brand/a.png",
     "/brand/d.png",
-    "/brand/c.png",
-    "/brand/e.png",
+    "/brand/21.png",
+    "/brand/78.png",
     "/brand/500.png",
     "/brand/700.png",
     "/brand/900.png",
     "/brand/84.png",
   ];
 
+  // Carousel images (excluding the first one)
+  const carouselImages = images.slice(1);
+
   const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % images.length);
+    setCurrentImage((prev) => (prev + 1) % carouselImages.length);
   };
 
   const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImage(
+      (prev) => (prev - 1 + carouselImages.length) % carouselImages.length
+    );
   };
 
   return (
@@ -35,7 +40,7 @@ export default function Showcase() {
       {/* Soft vignette glow */}
       <div className="absolute inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.12)_0%,rgba(0,0,0,1)_75%)]" />
 
-      {/* Carousel Hero */}
+      {/* Hero Image with Title - Static, No Carousel */}
       <motion.div
         initial={{ opacity: 0, scale: 1.08 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -44,40 +49,13 @@ export default function Showcase() {
         className="showcase-spotlight relative"
       >
         <Image
-          src={images[currentImage]}
+          src={images[0]}
           alt="Portfolio Artwork"
           width={1000}
           height={1200}
           className="spotlight-img"
           priority
         />
-
-        {/* Carousel Controls */}
-        <button
-          onClick={prevImage}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all z-10"
-        >
-          ←
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all z-10"
-        >
-          →
-        </button>
-
-        {/* Image Indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {images.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentImage(idx)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                idx === currentImage ? "bg-white w-8" : "bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
 
         <div className="spotlight-overlay" />
 
@@ -110,6 +88,58 @@ export default function Showcase() {
           and fine-art paintings. My work captures emotion, character, and mood
           — creating pieces that feel alive.
         </p>
+
+        {/* Carousel Gallery */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="mt-12 mb-8 relative"
+        >
+          <div className="relative max-w-4xl mx-auto mb-12">
+            <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+              <Image
+                src={carouselImages[currentImage]}
+                alt={`Gallery artwork ${currentImage + 1}`}
+                fill
+                className="object-cover"
+              />
+
+              {/* Carousel Controls */}
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 
+        rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center 
+        text-white hover:bg-black/70 transition-all z-10"
+              >
+                ←
+              </button>
+
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 
+        rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center 
+        text-white hover:bg-black/70 transition-all z-10"
+              >
+                →
+              </button>
+
+              {/* Image Indicators */}
+              <div className="absolute bottom-4 right-4 flex gap-2 z-10">
+                {carouselImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentImage(idx)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      idx === currentImage ? "bg-white w-8" : "bg-white/50"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Dropdowns Section */}
         <div className="mt-8 space-y-4">
