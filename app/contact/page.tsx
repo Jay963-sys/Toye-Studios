@@ -90,8 +90,8 @@ export default function ContactPage() {
         </svg>
       ),
       title: "Phone",
-      value: "+44 456 7890",
-      link: "tel:+44 456 7890",
+      value: "+44 7823541627",
+      link: "tel:+44 7823541627",
       description: "Mon-Fri from 9am to 6pm",
     },
     {
