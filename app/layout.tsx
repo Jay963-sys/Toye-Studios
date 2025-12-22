@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Navbar from "./components/navigation/Navbar";
 import Footer from "./components/navigation/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({
@@ -37,6 +38,7 @@ export default function RootLayout({
         <Navbar />
         <main className="min-h-screen pt-20">{children}</main>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   );
