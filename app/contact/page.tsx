@@ -127,19 +127,19 @@ export default function ContactPage() {
     {
       icon: <FaInstagram />,
       name: "Instagram",
-      href: "https://www.instagram.com/toye.studios/",
+      href: "https://www.instagram.com/toyestudios/",
       color: "from-gray-700 to-gray-500",
     },
     {
       icon: <FaTwitter />,
       name: "Twitter",
-      href: "https://www.twitter.com/toye.studios/",
+      href: "https://www.twitter.com/toyestudios/",
       color: "from-blue-400 to-blue-600",
     },
     {
       icon: <FaEnvelope />,
       name: "Email",
-      href: "mailto:omomamatoye@gmail.com",
+      href: "mailto:ToyeStudios@gmail.com",
       color: "from-blue-600 to-blue-800",
     },
     {

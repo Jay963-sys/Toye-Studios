@@ -38,16 +38,16 @@ export default function Footer() {
             </h4>
 
             <div className="flex items-center gap-5 text-xl">
-              <SocialIcon href="https://www.instagram.com/toye.studios/">
+              <SocialIcon href="https://www.instagram.com/toyestudios/">
                 <FaInstagram />
               </SocialIcon>
               <SocialIcon href="https://www.facebook.com/toye.pencils">
                 <FaFacebook />
               </SocialIcon>
-              <SocialIcon href="https://www.twitter.com/toye.studios/">
+              <SocialIcon href="https://www.twitter.com/toyestudios/">
                 <FaTwitter />
               </SocialIcon>
-              <SocialIcon href="mailto:omomamatoye@gmail.com">
+              <SocialIcon href="mailto:ToyeStudios@gmail.com">
                 <FaEnvelope />
               </SocialIcon>
             </div>
