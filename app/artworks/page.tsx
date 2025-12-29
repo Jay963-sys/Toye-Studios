@@ -13,11 +13,110 @@ type Artwork = {
 
 const ARTWORKS: Artwork[] = [
   {
+    title: "#30 Sketch",
+    image: "/hand/t41.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "#31 Sketch",
+    image: "/hand/t42.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
     title: "Ethereal Portrait",
     image: "/brand/c.png",
     medium: "Pencil",
     year: "2023",
     description: "A delicate exploration of light and shadow",
+  },
+  {
+    title: "Mood Light",
+    image: "/brand/d.png",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+
+  {
+    title: "#47 Sketch",
+    image: "/hand/t2.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "#40 Sketch",
+    image: "/hand/t10.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "#48 Sketch",
+    image: "/hand/t11.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "#49 Sketch",
+    image: "/hand/t12.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "#50 Sketch",
+    image: "/hand/t17.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "#51 Sketch",
+    image: "/hand/t19.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "#52 Sketch",
+    image: "/hand/t36.jpg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "#53 Sketch",
+    image: "/hand/t38.png",
+    medium: "Pencil",
+    year: "2023",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "Mood Dark",
+    image: "/brand/a.png",
+    medium: "Pencil",
+    year: "2021",
+    description: "Artistry meets emotional expression",
+  },
+  {
+    title: "Landscape Portrait",
+    image: "/brand/78.png",
+    medium: "Watercolor",
+    year: "2023",
+    description: "Green hues blend into dreamy compositions",
+  },
+  {
+    title: "Charcoal Portrait",
+    image: "/brand/66.png",
+    medium: "Charcoal",
+    year: "2024",
+    description: "Ethereal beauty in fluid watercolor",
   },
   {
     title: "Surreal Sketch",
@@ -33,13 +132,7 @@ const ARTWORKS: Artwork[] = [
     year: "2022",
     description: "Digital light captured in flowing lines",
   },
-  {
-    title: "Mood Light",
-    image: "/brand/d.png",
-    medium: "Pencil",
-    year: "2023",
-    description: "Artistry meets emotional expression",
-  },
+
   {
     title: "Light Sketch",
     image: "/brand/700.png",
@@ -81,27 +174,6 @@ const ARTWORKS: Artwork[] = [
     medium: "Watercolor",
     year: "2023",
     description: "Warm hues blend into dreamy compositions",
-  },
-  {
-    title: "Mood Dark",
-    image: "/brand/a.png",
-    medium: "Pencil",
-    year: "2021",
-    description: "Artistry meets emotional expression",
-  },
-  {
-    title: "Landscape Portrait",
-    image: "/brand/78.png",
-    medium: "Watercolor",
-    year: "2023",
-    description: "Green hues blend into dreamy compositions",
-  },
-  {
-    title: "Charcoal Portrait",
-    image: "/brand/66.png",
-    medium: "Charcoal",
-    year: "2024",
-    description: "Ethereal beauty in fluid watercolor",
   },
 ];
 

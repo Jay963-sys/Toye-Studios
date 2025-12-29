@@ -4,10 +4,26 @@ import Image from "next/image";
 import { useState } from "react";
 
 const EVENT_IMAGES = [
+  { src: "/hand/t14.jpg", title: "Paint with Olatoye Series" },
   { src: "/brand/98.png", title: "Sip & Paint Event" },
   { src: "/brand/888.png", title: "Paint with Olatoye Series" },
   { src: "/brand/n.png", title: "Community Workshop" },
   { src: "/brand/777.png", title: "Creative Experience" },
+  { src: "/hand/t28.jpg", title: "Paint with Olatoye Series" },
+  { src: "/hand/t40.jpg", title: "Sip & Paint Event" },
+  { src: "/hand/t43.jpg", title: "Community Workshop" },
+  { src: "/hand/t29.jpg", title: "Creative Experience" },
+  { src: "/hand/t30.jpg", title: "Creative Experience" },
+  { src: "/hand/t33.jpg", title: "Creative Experience" },
+  { src: "/hand/t34.jpg", title: "Creative Experience" },
+  { src: "/hand/t6.jpg", title: "Creative Experience" },
+  { src: "/hand/t7.jpg", title: "Creative Experience" },
+  { src: "/hand/t8.jpg", title: "Creative Experience" },
+  { src: "/hand/t9.jpg", title: "Creative Experience" },
+  { src: "/hand/t15.jpg", title: "Sip & Paint Event" },
+  { src: "/hand/t16.jpg", title: "Community Workshop" },
+  { src: "/hand/t23.jpg", title: "Creative Experience" },
+  { src: "/hand/t24.jpg", title: "Paint with Olatoye Series" },
 ];
 
 export default function CuratedEvents() {

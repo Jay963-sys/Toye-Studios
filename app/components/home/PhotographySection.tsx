@@ -4,10 +4,15 @@ import Image from "next/image";
 import { useState } from "react";
 
 const SAMPLE_PHOTOS = [
+  { src: "/brand/83.png", title: "Golden Hour", year: "2023" },
   { src: "/brand/12.png", title: "Mood Light", year: "2023" },
   { src: "/brand/54.png", title: "Grateful", year: "2022" },
-  { src: "/brand/83.png", title: "Golden Hour", year: "2023" },
   { src: "/brand/87.png", title: "Studio Portrait", year: "2023" },
+  { src: "/hand/321.jpg", title: "Freedom", year: "2024" },
+  { src: "/hand/322.jpg", title: "Light", year: "2023" },
+  { src: "/hand/324.jpg", title: "Lady", year: "2024" },
+  { src: "/hand/325.jpg", title: "Hers", year: "2024" },
+  { src: "/hand/326.jpg", title: "Red", year: "2024" },
 ];
 
 export default function Photography() {

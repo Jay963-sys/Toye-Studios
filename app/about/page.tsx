@@ -10,6 +10,77 @@ export default function AboutPage() {
   );
 
   const IMAGES = [
+    {
+      src: "/hand/t1.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t14.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t6.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t9.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t7.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t8.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t1.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t15.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t16.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t23.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t24.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t26.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t27.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+    {
+      src: "/hand/t30.jpg",
+      alt: "Sip and Paint Session",
+      caption: "Sip & Paint Event",
+    },
+
     { src: "/brand/p.png", alt: "Artist Portrait", caption: "At an Event" },
     {
       src: "/brand/o.png",

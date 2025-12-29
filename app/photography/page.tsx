@@ -87,6 +87,46 @@ const PHOTOS: Photo[] = [
     description: "Raw emotion and authentic human connection",
     location: "Studio",
   },
+  {
+    title: "Life",
+    year: "2025",
+    category: "Portraits",
+    src: "/hand/325.jpg",
+    description: "Raw emotion and authentic human connection",
+    location: "Studio",
+  },
+  {
+    title: "Red",
+    year: "2025",
+    category: "Portraits",
+    src: "/hand/326.jpg",
+    description: "Raw emotion and authentic human connection",
+    location: "Studio",
+  },
+  {
+    title: "Peace",
+    year: "2025",
+    category: "Portraits",
+    src: "/hand/321.jpg",
+    description: "Raw emotion and authentic human connection",
+    location: "Outdoor",
+  },
+  {
+    title: "Stillness",
+    year: "2025",
+    category: "Portraits",
+    src: "/hand/322.jpg",
+    description: "Raw emotion and authentic human connection",
+    location: "Outdoor",
+  },
+  {
+    title: "City Lights",
+    year: "2025",
+    category: "Portraits",
+    src: "/hand/323.jpg",
+    description: "Raw emotion and authentic human connection",
+    location: "Outdoor",
+  },
 ];
 
 const CATEGORIES = ["All", "Portraits", "Events", "Outdoor"];

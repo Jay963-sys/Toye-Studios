@@ -11,6 +11,13 @@ export default function Showcase() {
 
   const images = [
     "/brand/p.png",
+    "/hand/t41.jpg",
+    "/hand/t17.jpg",
+    "/hand/t38.png",
+    "/hand/t36.jpg",
+    "/hand/t42.jpg",
+    "/hand/t10.jpg",
+    "/hand/t2.jpg",
     "/brand/b.png",
     "/brand/a.png",
     "/brand/d.png",
