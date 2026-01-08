@@ -59,14 +59,21 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} Toye Studios. All rights reserved.</p>
 
           <p className="italic">
-            Created by{" "}
             <Link
               href="https://jay-dev-portfolio.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#1b38b9] transition-colors font-medium"
+              className="
+    font-medium
+    underline
+    underline-offset-4
+    decoration-neutral-600
+    hover:decoration-white
+    hover:text-white
+    transition-colors
+  "
             >
-              Jay
+              Designed by Jay
             </Link>
           </p>
         </div>
