@@ -55,8 +55,20 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-500">
-          © {new Date().getFullYear()} Toye Studios. All rights reserved.
+        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-500 space-y-2">
+          <p>© {new Date().getFullYear()} Toye Studios. All rights reserved.</p>
+
+          <p className="italic">
+            Created by{" "}
+            <Link
+              href="https://jay-dev-portfolio.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-[#1b38b9] transition-colors font-medium"
+            >
+              Jay
+            </Link>
+          </p>
         </div>
       </div>
     </footer>
