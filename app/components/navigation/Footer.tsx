@@ -44,7 +44,7 @@ export default function Footer() {
               <SocialIcon href="https://www.facebook.com/toye.pencils">
                 <FaFacebook />
               </SocialIcon>
-              <SocialIcon href="https://www.twitter.com/toyestudios/">
+              <SocialIcon href="https://www.twitter.com/toye.studios/">
                 <FaTwitter />
               </SocialIcon>
               <SocialIcon href="mailto:ToyeStudios@gmail.com">

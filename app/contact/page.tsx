@@ -26,7 +26,7 @@ export default function ContactPage() {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -127,13 +127,13 @@ export default function ContactPage() {
     {
       icon: <FaInstagram />,
       name: "Instagram",
-      href: "https://www.instagram.com/toyestudios/",
+      href: "https://www.instagram.com/toye.studios/",
       color: "from-gray-700 to-gray-500",
     },
     {
       icon: <FaTwitter />,
       name: "Twitter",
-      href: "https://www.twitter.com/toyestudios/",
+      href: "https://www.twitter.com/toye.studios/",
       color: "from-blue-400 to-blue-600",
     },
     {
