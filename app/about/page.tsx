@@ -2,471 +2,224 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { ReactElement } from "react";
+import Link from "next/link";
 
-export default function AboutPage() {
-  const [activeTab, setActiveTab] = useState<"story" | "values" | "experience">(
-    "story"
-  );
+const STATS = [
+  { val: "10+", label: "Years Experience" },
+  { val: "500+", label: "Students Taught" },
+  { val: "50+", label: "Exhibitions" },
+  { val: "100+", label: "Works Created" },
+];
 
-  const IMAGES = [
-    {
-      src: "/hand/t1.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t14.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t6.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t9.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t7.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t8.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t1.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t15.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t16.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t23.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t24.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t26.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t27.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-    {
-      src: "/hand/t30.jpg",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
+const TIMELINE = [
+  {
+    year: "2014",
+    event: "The Genesis",
+    desc: "Began the exploration of visual arts and photography.",
+  },
+  {
+    year: "2018",
+    event: "First Exhibition",
+    desc: "Debuted 'Silent Dialogue' at a curated local gallery.",
+  },
+  {
+    year: "2020",
+    event: "Curatorial Mastery",
+    desc: "Completed advanced studies in Curating to deepen artistic context.",
+  },
+  {
+    year: "2022",
+    event: "Talk Canvas",
+    desc: "Appointed Creative Director at Talk Canvas Gallery.",
+  },
+  {
+    year: "2024",
+    event: "The Atelier",
+    desc: "Launched a global teaching program for hyperrealistic techniques.",
+  },
+];
 
-    { src: "/brand/p.png", alt: "Artist Portrait", caption: "At an Event" },
-    {
-      src: "/brand/o.png",
-      alt: "Creative Giving",
-      caption: "Creative Giving",
-    },
-    { src: "/brand/get.png", alt: "Studio Workspace", caption: "My workspace" },
-    {
-      src: "/brand/n.png",
-      alt: "Community Engagement",
-      caption: "Teaching & sharing",
-    },
-    { src: "/brand/m.png", alt: "Art Exhibition", caption: "Exhibition Day" },
-    {
-      src: "/brand/98.png",
-      alt: "Sip and Paint Session",
-      caption: "Sip & Paint Event",
-    },
-  ];
+const BEHIND_SCENES = [
+  { src: "/hand/t1.jpg", caption: "Community Energy" },
+  { src: "/brand/get.png", caption: "The Workspace" },
+  { src: "/hand/t16.jpg", caption: "Teaching Session" },
+  { src: "/brand/m.png", caption: "Exhibition Prep" },
+];
 
-  const TIMELINE = [
-    {
-      year: "2014",
-      event: "Began artistic journey",
-      description: "Started exploring visual arts and photography",
-    },
-    {
-      year: "2018",
-      event: "First major exhibition",
-      description: "Showcased work at local gallery",
-    },
-    {
-      year: "2020",
-      event: "Master's in Curating",
-      description: "Completed advanced studies in art curation",
-    },
-    {
-      year: "2022",
-      event: "Creative Director",
-      description: "Joined Talk Canvas Gallery as Creative Director",
-    },
-    {
-      year: "2024",
-      event: "Teaching Program",
-      description: "Launched comprehensive workshop series",
-    },
-  ];
-
-  const VALUES = [
-    {
-      icon: "",
-      title: "Creative Expression",
-      description:
-        "Art as a universal language that transcends boundaries and connects souls",
-    },
-    {
-      icon: "",
-      title: "Community Impact",
-      description:
-        "Building bridges through collaborative projects and inclusive spaces",
-    },
-    {
-      icon: "",
-      title: "Lifelong Learning",
-      description:
-        "Continuously evolving as an artist, educator, and human being",
-    },
-    {
-      icon: "",
-      title: "Authenticity",
-      description:
-        "Staying true to my vision while embracing diverse perspectives",
-    },
-  ];
-
+export default function AboutPage(): ReactElement {
   return (
-    <section className="relative w-full min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white py-16 sm:py-24 px-4 sm:px-8 md:px-12 overflow-hidden">
-      {/* Enhanced Background Effects */}
-      <div className="absolute inset-0 pointer-events-none -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(168,85,247,0.15)_0%,rgba(0,0,0,0)_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(236,72,153,0.1)_0%,rgba(0,0,0,0)_50%)]" />
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20" />
+    <section className="relative w-full min-h-screen bg-black text-white py-32 px-4 md:px-12 overflow-hidden">
+      {/* 1. BACKGROUND TEXTURE & AMBIENCE */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.03)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
       </div>
 
-      {/* Hero Section */}
-      <div className="max-w-6xl mx-auto mb-20">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="inline-block mb-4">
-            <span className="text-sm uppercase tracking-widest text-blue-400 font-medium">
-              Artist · Educator · Curator
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* 2. HERO: THE BIOGRAPHY */}
+        <div className="mb-40">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-center md:text-left"
+          >
+            <span className="text-[10px] uppercase tracking-[1em] text-amber-500/60 block mb-6">
+              Biography
             </span>
-          </div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif mb-6 bg-gradient-to-r from-white via-purple-100 to-pink-200 bg-clip-text text-transparent">
-            About Me
-          </h1>
-          <p className="text-gray-400 leading-relaxed text-base sm:text-lg max-w-2xl mx-auto">
-            A multidisciplinary creative dedicated to storytelling, community
-            building,
-            <br className="hidden sm:block" />
-            and inspiring others through the transformative power of art.
-          </p>
-        </motion.div>
+            <h1 className="text-6xl md:text-[10rem] font-serif italic leading-none tracking-tighter mb-12 uppercase">
+              Olatoye{" "}
+              <span className="text-amber-500 not-italic font-light">
+                Salawudeen
+              </span>
+            </h1>
+          </motion.div>
 
-        {/* Stats Bar */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-8 md:gap-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
-          <div>
-            <div className="text-4xl font-bold text-transparent bg-gradient-to-r from-gray-700 to-gray-400 bg-clip-text mb-1">
-              10+
-            </div>
-            <div className="text-gray-500 text-sm uppercase tracking-wider">
-              Years Experience
-            </div>
-          </div>
-          <div className="w-px bg-gray-800 hidden sm:block" />
-          <div>
-            <div className="text-4xl font-bold text-transparent bg-gradient-to-r from-gray-700 to-gray-400 bg-clip-text mb-1">
-              500+
-            </div>
-            <div className="text-gray-500 text-sm uppercase tracking-wider">
-              Students Taught
-            </div>
-          </div>
-          <div className="w-px bg-gray-800 hidden sm:block" />
-          <div>
-            <div className="text-4xl font-bold text-transparent bg-gradient-to-r from-gray-700 to-gray-400 bg-clip-text mb-1">
-              50+
-            </div>
-            <div className="text-gray-500 text-sm uppercase tracking-wider">
-              Exhibitions
-            </div>
-          </div>
-          <div className="w-px bg-gray-800 hidden sm:block" />
-          <div>
-            <div className="text-4xl font-bold text-transparent bg-gradient-to-r from-gray-700 to-gray-400 bg-clip-text mb-1">
-              100+
-            </div>
-            <div className="text-gray-500 text-sm uppercase tracking-wider">
-              Artworks Created
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Main Content with Tabs */}
-      <div className="max-w-6xl mx-auto mb-20">
-        {/* Tab Navigation */}
-        <motion.div
-          className="flex justify-center gap-4 mb-12 flex-wrap"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          {[
-            { id: "story" as const, label: "My Story" },
-            { id: "values" as const, label: "Core Values" },
-            { id: "experience" as const, label: "Experience" },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`relative px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeTab === tab.id
-                  ? "text-white shadow-lg"
-                  : "text-gray-400 hover:text-white border border-black/10 hover:border-black/30"
-              }`}
-            >
-              {activeTab === tab.id && (
-                <motion.div
-                  layoutId="activeAboutTab"
-                  className="absolute inset-0 bg-gradient-to-r from-gray-500/80 to-gray-400/80 rounded-full"
-                  transition={{ type: "spring", duration: 0.6 }}
-                />
-              )}
-              <span className="relative z-10">{tab.label}</span>
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Tab Content */}
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {activeTab === "story" && (
-            <div className="max-w-4xl mx-auto space-y-8 text-center">
-              <div className="prose prose-invert prose-lg max-w-none">
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  My artistic journey began over a decade ago with a simple
-                  fascination:
-                  <span className="text-white font-medium">
-                    {" "}
-                    how can emotions be translated into visual form?
-                  </span>{" "}
-                  What started as curiosity evolved into a lifelong passion for
-                  creating art that speaks to the human experience.
-                </p>
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  I&apos;ve explored multiple mediums—from traditional painting
-                  and drawing to digital art and photography—each offering
-                  unique ways to tell stories and evoke emotions. My work has
-                  been featured in galleries across the region, and I&apos;ve
-                  had the privilege of connecting with diverse audiences through
-                  exhibitions and collaborative projects.
-                </p>
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  Beyond creating, I found my calling in{" "}
-                  <span className="text-white font-medium">
-                    teaching and curating
-                  </span>
-                  . After completing my Master&apos;s degree in Curating, I
-                  joined Talk Canvas Gallery as Creative Director, where I help
-                  shape exhibitions that challenge perspectives and celebrate
-                  creativity. Teaching has become one of the most rewarding
-                  aspects of my practice—watching students discover their
-                  artistic voice brings me immense joy.
-                </p>
-              </div>
-
-              {/* Quote */}
-              <div className="relative p-8 rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-white/10 mt-12">
-                <div className="absolute -top-4 left-8 text-6xl text-purple-400 opacity-50">
-                  <p>“</p>
-                </div>
-                <p className="text-xl sm:text-2xl font-serif text-gray-200 italic relative z-10 text-center">
-                  Art is not just about creation; it&apos;s about connection.
-                  Every piece I make, every class I teach, and every exhibition
-                  I curate is meant to inspire and bring people closer to the
-                  beauty of creativity.
-                </p>
-              </div>
-            </div>
-          )}
-
-          {activeTab === "values" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {VALUES.map((value, idx) => (
-                <motion.div
-                  key={idx}
-                  className="p-8 rounded-2xl bg-gradient-to-br from-black-900 to-black-800 border border-black/10 hover:border-gray-800/50 transition-all duration-300 hover:shadow-lg hover:shadow-black-500/20"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                >
-                  <div className="text-5xl mb-4">{value.icon}</div>
-                  <h3 className="text-2xl font-semibold mb-3">{value.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          )}
-
-          {activeTab === "experience" && (
-            <div className="max-w-4xl mx-auto space-y-12">
-              {/* Timeline */}
-              <div>
-                <h3 className="text-2xl font-semibold mb-8 text-center">
-                  Career Timeline
-                </h3>
-                <div className="relative">
-                  {/* Timeline line */}
-                  <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-black-900 via-black-700 to-black-900" />
-
-                  <div className="space-y-8">
-                    {TIMELINE.map((item, idx) => (
-                      <motion.div
-                        key={idx}
-                        className="relative pl-20"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.1 }}
-                      >
-                        {/* Timeline dot */}
-                        <div className="absolute left-6 top-2 w-5 h-5 rounded-full bg-gradient-to-r from-gray-500 to-gray-700 border-4 border-black" />
-
-                        <div className="bg-gradient-to-br from-black-800 to-black-900 p-6 rounded-xl border border-black/10 hover:border-gray-800/50 transition-all duration-300">
-                          <div className="text-gray-400 font-semibold mb-1">
-                            {item.year}
-                          </div>
-                          <h4 className="text-xl font-semibold mb-2">
-                            {item.event}
-                          </h4>
-                          <p className="text-gray-400">{item.description}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Skills */}
-              <div className="mt-16">
-                <div className="space-y-6"></div>
-              </div>
-            </div>
-          )}
-        </motion.div>
-      </div>
-
-      {/* Image Gallery */}
-      <motion.div
-        className="max-w-6xl mx-auto mb-20"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-3xl font-serif text-center mb-12">
-          Behind the Scenes
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {IMAGES.map((img, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <motion.div
-              key={i}
-              className="relative aspect-square rounded-2xl overflow-hidden group cursor-pointer border border-white/10"
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              transition={{ duration: 1 }}
+              className="relative aspect-[4/5] bg-zinc-900 border border-white/5"
             >
               <Image
-                src={img.src}
-                alt={img.alt}
+                src="/brand/p.png"
+                alt="Olatoye Portrait"
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-sm font-medium">{img.caption}</p>
-              </div>
+              <div className="absolute inset-4 border border-white/10 pointer-events-none" />
             </motion.div>
-          ))}
-        </div>
-      </motion.div>
 
-      {/* CTA Section */}
-      <motion.div
-        className="max-w-4xl mx-auto"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="relative rounded-3xl overflow-hidden p-10 sm:p-16 text-center bg-gradient-to-br from-black-900/20 to-black-800/20 border border-black/10">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30" />
+            <div className="space-y-8">
+              <p className="text-2xl md:text-3xl font-light leading-relaxed text-gray-300 italic font-serif">
+                &quot;Art is not just about creation; it&apos;s about
+                connection. Every piece is a testament to the quiet dialogue
+                between artist and observer.&quot;
+              </p>
+              <div className="h-px w-20 bg-amber-500/40" />
+              <p className="text-gray-500 text-lg font-light leading-relaxed">
+                With a decade spent mastering the intricate dance of light and
+                shadow, my journey has evolved from simple curiosity to a
+                professional practice in hyperrealistic portraiture,
+                photography, and curatorial direction.
+              </p>
 
-          <div className="relative z-10">
-            <h2 className="text-3xl sm:text-4xl font-serif mb-4">
-              Let&apos;s Create Together
-            </h2>
-            <p className="text-gray-300 mb-8 max-w-2xl mx-auto text-base sm:text-lg">
-              Whether you&apos;re looking to commission artwork, collaborate on
-              a project, or join a workshop, I&apos;d love to hear from you.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-gray-500 to-gray-500 text-white font-medium hover:shadow-lg hover:shadow-gray-500/50 transition-all duration-300 hover:scale-105"
-              >
-                Get in Touch
-              </a>
-              <a
-                href="/photography"
-                className="px-8 py-4 rounded-full border border-black/20 bg-black/5 text-white font-medium hover:bg-white/10 transition-all duration-300"
-              >
-                View My Work
-              </a>
+              {/* STATS STRIP */}
+              <div className="grid grid-cols-2 gap-8 pt-8">
+                {STATS.map((s, i) => (
+                  <div key={i}>
+                    <p className="text-3xl font-bold text-white">{s.val}</p>
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-amber-500/50">
+                      {s.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </motion.div>
+
+        {/* 3. ARCHIVAL TIMELINE */}
+        <div className="mb-40 pt-20 border-t border-white/5">
+          <span className="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] block mb-20">
+            The Evolution_Timeline
+          </span>
+          <div className="space-y-24">
+            {TIMELINE.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline group"
+              >
+                <div className="md:col-span-2 text-4xl font-serif italic text-amber-500/40 group-hover:text-amber-500 transition-colors">
+                  {item.year}
+                </div>
+                <div className="md:col-span-4 text-2xl uppercase tracking-tighter font-light">
+                  {item.event}
+                </div>
+                <div className="md:col-span-6 text-gray-500 font-light text-lg">
+                  {item.desc}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* 4. BEHIND THE SCENES: STUDIO WALL */}
+        <div className="mb-40">
+          <div className="flex justify-between items-end mb-16">
+            <h2 className="text-4xl md:text-6xl font-serif italic">
+              Studio <span className="text-amber-500">&</span> Soul
+            </h2>
+            <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest pb-2">
+              Behind the Scenes
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {BEHIND_SCENES.map((img, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -10 }}
+                className="relative aspect-square bg-zinc-900 border border-white/5 overflow-hidden group"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.caption}
+                  fill
+                  className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                />
+                <div className="absolute bottom-4 left-4">
+                  <p className="text-[9px] font-mono text-white/40 group-hover:text-white uppercase tracking-widest">
+                    {img.caption}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* 5. CTA: FINAL INVITATION */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          className="relative py-24 px-8 border border-amber-500/20 bg-gradient-to-br from-amber-500/[0.02] to-transparent text-center overflow-hidden"
+        >
+          <div className="relative z-10 space-y-8">
+            <h2 className="text-4xl md:text-7xl font-serif italic tracking-tighter">
+              Let&apos;s Create <br />{" "}
+              <span className="text-amber-500">Something Real.</span>
+            </h2>
+            <p className="max-w-xl mx-auto text-gray-500 font-light">
+              Whether it&apos;s a legacy commission, a creative collaboration,
+              or a journey through the foundations of art, I invite you to my
+              studio.
+            </p>
+            <div className="flex flex-col md:flex-row justify-center gap-6 pt-8">
+              <Link
+                href="/contact"
+                className="px-12 py-4 bg-amber-500 text-black font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-white transition-all duration-500"
+              >
+                Contact Studio
+              </Link>
+              <Link
+                href="/artworks"
+                className="px-12 py-4 border border-white/10 text-white/40 font-mono text-[10px] uppercase tracking-[0.4em] hover:text-white hover:border-white transition-all"
+              >
+                Explore Archive
+              </Link>
+            </div>
+          </div>
+          {/* Subtle logo bg mark */}
+          <div className="absolute -bottom-20 -right-20 text-[20rem] font-serif text-white/[0.02] italic pointer-events-none select-none">
+            T
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,216 +1,217 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
-import "./showcase.css";
+import { useState, ReactElement } from "react";
+import Link from "next/link";
 
-export default function Showcase() {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [showCommissions, setShowCommissions] = useState(false);
-  const [showClasses, setShowClasses] = useState(false);
+const ARTIST_IMAGE = "/brand/p.png";
+const PORTFOLIO_IMAGES = [
+  "/hand/t41.jpg",
+  "/hand/t17.jpg",
+  "/hand/t38.png",
+  "/hand/t36.jpg",
+  "/hand/t42.jpg",
+  "/hand/t10.jpg",
+  "/hand/t2.jpg",
+  "/brand/b.png",
+  "/brand/a.png",
+  "/brand/d.png",
+  "/brand/21.png",
+];
 
-  const images = [
-    "/brand/p.png",
-    "/hand/t41.jpg",
-    "/hand/t17.jpg",
-    "/hand/t38.png",
-    "/hand/t36.jpg",
-    "/hand/t42.jpg",
-    "/hand/t10.jpg",
-    "/hand/t2.jpg",
-    "/brand/b.png",
-    "/brand/a.png",
-    "/brand/d.png",
-    "/brand/21.png",
-    "/brand/78.png",
-    "/brand/500.png",
-    "/brand/700.png",
-    "/brand/900.png",
-    "/brand/84.png",
-  ];
-
-  // Carousel images (excluding the first one)
-  const carouselImages = images.slice(1);
-
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % carouselImages.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImage(
-      (prev) => (prev - 1 + carouselImages.length) % carouselImages.length
-    );
-  };
+export default function Showcase(): ReactElement {
+  const [activeWork, setActiveWork] = useState(0);
 
   return (
-    <section className="showcase-container relative overflow-hidden">
-      {/* Soft vignette glow */}
-      <div className="absolute inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.12)_0%,rgba(0,0,0,1)_75%)]" />
+    <section className="bg-black text-white py-24 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto">
+        {/* --- PART 1: THE ARTIST (Static Anchor) --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-40">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="relative aspect-[4/5] w-full max-w-md mx-auto lg:mx-0 rounded-sm overflow-hidden border border-white/10"
+          >
+            <Image
+              src={ARTIST_IMAGE}
+              alt="Olatoye - Portrait Artist"
+              fill
+              className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+              priority
+            />
+            <div className="absolute inset-4 border border-white/5 pointer-events-none" />
+          </motion.div>
 
-      {/* Hero Image with Title - Static, No Carousel */}
-      <motion.div
-        initial={{ opacity: 0, scale: 1.08 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.4, ease: "easeOut" }}
-        viewport={{ once: true }}
-        className="showcase-spotlight relative"
-      >
-        <Image
-          src={images[0]}
-          alt="Portfolio Artwork"
-          width={1000}
-          height={1200}
-          className="spotlight-img"
-          priority
-        />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="space-y-8"
+          >
+            <span className="text-amber-500 font-mono text-xs uppercase tracking-[0.5em]">
+              The Philosophy
+            </span>
+            <h2 className="text-5xl md:text-7xl font-serif italic leading-tight">
+              Capturing the <br />
+              <span className="text-amber-500/90">Silent Dialogue</span>
+            </h2>
+            <blockquote className="border-l-2 border-amber-500/30 pl-6 italic text-xl md:text-2xl text-gray-300 font-light max-w-lg">
+              Art isn&apos;t just a reflection of what we see, but a testament
+              to what we feel in the quiet moments of observation.
+            </blockquote>
+            <p className="text-gray-500 max-w-md leading-relaxed">
+              With over a decade of dedication to hyperrealism, Olatoye
+              transforms charcoal and canvas into living narratives.
+            </p>
+          </motion.div>
+        </div>
 
-        <div className="spotlight-overlay" />
-
-        {/* Title */}
-        <h2 className="enhanced-spotlight-title text-white font-light leading-[1.1]">
-          <span className="block animate-fade-in-up font-cursive text-5xl md:text-6xl lg:text-7xl">
-            Where
-          </span>
-          <span className="block animate-fade-in-up delay-150 font-cursive text-5xl md:text-6xl lg:text-7xl">
-            Art
-          </span>
-          <span className="block animate-fade-in-up delay-300 font-cursive text-5xl md:text-6xl lg:text-7xl">
-            Comes Alive
-          </span>
-        </h2>
-      </motion.div>
-
-      {/* Artist Description */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, ease: "easeOut" }}
-        viewport={{ once: true }}
-        className="showcase-description"
-      >
-        <h3 className="desc-heading">Portrait Artist & Visual Storyteller</h3>
-        <p className="desc-text">
-          With over a decade of experience in hyperrealistic portraiture, I
-          bring stories to life through expressive sketches, charcoal studies,
-          and fine-art paintings. My work captures emotion, character, and mood
-          — creating pieces that feel alive.
-        </p>
-
-        {/* Carousel Gallery */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="mt-12 mb-8 relative"
-        >
-          <div className="relative max-w-4xl mx-auto mb-12">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-              <Image
-                src={carouselImages[currentImage]}
-                alt={`Gallery artwork ${currentImage + 1}`}
-                fill
-                className="object-cover"
-              />
-
-              {/* Carousel Controls */}
-              <button
-                onClick={prevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 
-        rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center 
-        text-white hover:bg-black/70 transition-all z-10"
-              >
-                ←
-              </button>
-
-              <button
-                onClick={nextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 
-        rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center 
-        text-white hover:bg-black/70 transition-all z-10"
-              >
-                →
-              </button>
-
-              {/* Image Indicators */}
-              <div className="absolute bottom-4 right-4 flex gap-2 z-10">
-                {carouselImages.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentImage(idx)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      idx === currentImage ? "bg-white w-8" : "bg-white/50"
-                    }`}
-                  />
-                ))}
-              </div>
+        {/* --- PART 2: THE WORK (Discovery Gallery) --- */}
+        <div className="pt-20 border-t border-white/5 mb-40">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <span className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.4em]">
+                Portfolio
+              </span>
+              <h3 className="text-3xl font-light uppercase tracking-tighter mt-2">
+                Selected Works
+              </h3>
+            </div>
+            <div className="text-right font-mono text-xs text-white/20">
+              {activeWork + 1} / {PORTFOLIO_IMAGES.length}
             </div>
           </div>
-        </motion.div>
 
-        {/* Dropdowns Section */}
-        <div className="mt-8 space-y-4">
-          {/* Commissions Dropdown */}
-          <div className="border border-white/20 rounded-lg overflow-hidden">
-            <button
-              onClick={() => setShowCommissions(!showCommissions)}
-              className="w-full px-6 py-4 bg-white/5 hover:bg-white/10 transition-all flex justify-between items-center text-white"
-            >
-              <span className="font-semibold">Commissions</span>
-              <span className="text-2xl">{showCommissions ? "−" : "+"}</span>
-            </button>
-            {showCommissions && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="px-6 py-4 bg-white/5 text-gray-300"
-              >
-                <p className="mb-3">
-                  Custom portrait commissions available for:
-                </p>
-                <ul className="space-y-2 list-disc list-inside">
-                  <li>Individual portraits</li>
-                  <li>Family portraits</li>
-                  <li>Pet portraits</li>
-                  <li>Memorial pieces</li>
-                  <li>Corporate commissions</li>
-                </ul>
-              </motion.div>
-            )}
-          </div>
+          <div className="flex flex-col lg:flex-row gap-8">
+            <div className="relative w-full lg:w-2/3 aspect-[16/10] bg-white/5 rounded-sm overflow-hidden shadow-2xl">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeWork}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-full h-full"
+                >
+                  <Image
+                    src={PORTFOLIO_IMAGES[activeWork]}
+                    alt="Portfolio Item"
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-          {/* Art Classes Dropdown */}
-          <div className="border border-white/20 rounded-lg overflow-hidden">
-            <button
-              onClick={() => setShowClasses(!showClasses)}
-              className="w-full px-6 py-4 bg-white/5 hover:bg-white/10 transition-all flex justify-between items-center text-white"
-            >
-              <span className="font-semibold">Art Classes</span>
-              <span className="text-2xl">{showClasses ? "−" : "+"}</span>
-            </button>
-            {showClasses && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="px-6 py-4 bg-white/5 text-gray-300"
-              >
-                <p className="mb-3">
-                  Learn to create with personalized instruction:
-                </p>
-                <ul className="space-y-2 list-disc list-inside">
-                  <li>Private one-on-one sessions</li>
-                  <li>Group workshops</li>
-                  <li>Corporate team-building events</li>
-                  <li>Special occasion classes</li>
-                  <li>Online tutorials</li>
-                </ul>
-              </motion.div>
-            )}
+            <div className="w-full lg:w-1/3 flex lg:flex-col gap-4 overflow-x-auto lg:overflow-y-auto lg:max-h-[60vh] scrollbar-hide">
+              {PORTFOLIO_IMAGES.map((src, i) => (
+                <button
+                  key={i}
+                  onMouseEnter={() => setActiveWork(i)}
+                  className={`relative flex-shrink-0 w-24 lg:w-full aspect-video rounded-sm overflow-hidden border transition-all duration-300 ${
+                    activeWork === i
+                      ? "border-amber-500 opacity-100"
+                      : "border-white/10 opacity-40 hover:opacity-70"
+                  }`}
+                >
+                  <Image
+                    src={src}
+                    alt={`Thumbnail ${i}`}
+                    fill
+                    className="object-cover"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </motion.div>
+
+        {/* --- PART 3: SERVICES (The Atelier) --- */}
+        <div className="pt-20 border-t border-white/5">
+          <div className="text-center mb-20">
+            <span className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.8em]">
+              Atelier Services
+            </span>
+            <h3 className="text-4xl md:text-6xl font-light mt-4">Offerings</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
+            {/* Art Classes */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div className="space-y-2">
+                <h4 className="text-2xl font-serif italic text-amber-500">
+                  Art Classes
+                </h4>
+                <p className="text-gray-400 text-sm">
+                  Learn to create with personalized instruction:
+                </p>
+              </div>
+              <ul className="space-y-4 text-gray-300 font-light border-l border-white/10 pl-6">
+                <li>Private one-on-one sessions</li>
+                <li>Group workshops</li>
+                <li>Corporate team-building events</li>
+                <li>Special occasion classes</li>
+                <li>Online tutorials</li>
+              </ul>
+              <div className="pt-4">
+                <p className="text-xs font-mono text-gray-500 mb-4 uppercase">
+                  Sessions starting from £75
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-block px-8 py-3 bg-white text-black text-xs uppercase tracking-widest font-bold hover:bg-amber-500 transition-colors duration-300"
+                >
+                  Book Class
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Art Commissions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="space-y-8"
+            >
+              <div className="space-y-2">
+                <h4 className="text-2xl font-serif italic text-amber-500">
+                  Art Commissions
+                </h4>
+                <p className="text-gray-400 text-sm">
+                  Custom portrait commissions available for:
+                </p>
+              </div>
+              <ul className="space-y-4 text-gray-300 font-light border-l border-white/10 pl-6">
+                <li>Individual portraits</li>
+                <li>Family portraits</li>
+                <li>Pet portraits</li>
+                <li>Memorial pieces</li>
+                <li>Corporate commissions</li>
+              </ul>
+              <div className="pt-4">
+                <p className="text-xs font-mono text-gray-500 mb-4 uppercase">
+                  Portraits starting from £350
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-block px-8 py-3 border border-white text-white text-xs uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-300"
+                >
+                  Request Quote
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

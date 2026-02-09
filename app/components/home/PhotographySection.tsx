@@ -1,163 +1,155 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useSpring } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, MouseEvent, ReactElement, useEffect } from "react";
+import Link from "next/link";
 
-const SAMPLE_PHOTOS = [
-  { src: "/brand/83.png", title: "Golden Hour", year: "2023" },
-  { src: "/brand/12.png", title: "Mood Light", year: "2023" },
-  { src: "/brand/54.png", title: "Grateful", year: "2022" },
-  { src: "/brand/87.png", title: "Studio Portrait", year: "2023" },
-  { src: "/hand/321.jpg", title: "Freedom", year: "2024" },
-  { src: "/hand/322.jpg", title: "Light", year: "2023" },
-  { src: "/hand/324.jpg", title: "Lady", year: "2024" },
-  { src: "/hand/325.jpg", title: "Hers", year: "2024" },
-  { src: "/hand/326.jpg", title: "Red", year: "2024" },
+interface Photo {
+  src: string;
+  title: string;
+  year: string;
+}
+
+const SAMPLE_PHOTOS: Photo[] = [
+  { src: "/hand/x2.jpeg", title: "Golden Hour", year: "2023" },
+  { src: "/hand/x1.jpeg", title: "Mood Light", year: "2023" },
+  { src: "/hand/x4.jpeg", title: "Grateful", year: "2022" },
+  { src: "/hand/x3.jpeg", title: "Studio Portrait", year: "2023" },
+  { src: "/hand/x5.jpeg", title: "Freedom", year: "2024" },
+  { src: "/hand/x6.jpeg", title: "Light", year: "2023" },
+  { src: "/hand/x7.jpeg", title: "Lady", year: "2024" },
+  { src: "/hand/x8.jpeg", title: "Hers", year: "2024" },
+  { src: "/hand/x9.jpeg", title: "Red", year: "2024" },
 ];
 
-export default function Photography() {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [showServices, setShowServices] = useState(false);
+export default function Photography(): ReactElement {
+  const [index, setIndex] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % SAMPLE_PHOTOS.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImage(
-      (prev) => (prev - 1 + SAMPLE_PHOTOS.length) % SAMPLE_PHOTOS.length
+  useEffect(() => {
+    setIsMobile(
+      window.matchMedia("(max-width: 768px)").matches ||
+        "ontouchstart" in window,
     );
+  }, []);
+
+  const mouseX = useSpring(0, { stiffness: 100, damping: 30 });
+  const mouseY = useSpring(0, { stiffness: 100, damping: 30 });
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (isMobile) return;
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (rect) {
+      mouseX.set(e.clientX - rect.left);
+      mouseY.set(e.clientY - rect.top);
+    }
   };
 
   return (
-    <section className="relative photography-container max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16 border-t border-white/5 overflow-hidden">
-      {/* Soft vignette background */}
-      <div className="absolute inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.12)_0%,rgba(0,0,0,1)_75%)]" />
+    <section
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className="relative bg-black py-16 md:py-24 px-4 md:px-12 overflow-hidden"
+    >
+      {!isMobile && (
+        <motion.div
+          style={{ x: mouseX, y: mouseY }}
+          className="absolute w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0"
+        />
+      )}
 
-      {/* Text Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2 }}
-        className="photography-text max-w-3xl mx-auto mb-12 text-center px-2 sm:px-0"
-      >
-        <h3 className="desc-heading text-2xl sm:text-3xl md:text-4xl text-white mb-4">
-          Photography
-        </h3>
-        <p className="desc-text text-gray-300 text-sm sm:text-base leading-relaxed">
-          Photography is my way of observing the world through emotion, light,
-          and storytelling. Every session is an opportunity to discover
-          something real — a quiet expression, a burst of joy, or the subtle
-          details that make a moment unforgettable.
-        </p>
-      </motion.div>
-
-      {/* Carousel Section */}
-      <div className="relative max-w-4xl mx-auto mb-12">
-        <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-          <Image
-            src={SAMPLE_PHOTOS[currentImage].src}
-            alt={SAMPLE_PHOTOS[currentImage].title}
-            fill
-            className="object-cover"
-          />
-
-          {/* Carousel Controls */}
-          <button
-            onClick={prevImage}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all z-10"
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12 md:mb-16">
+        <div className="lg:col-span-5">
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-7xl font-serif italic text-white mb-4 uppercase tracking-tighter"
           >
-            ←
-          </button>
-          <button
-            onClick={nextImage}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all z-10"
-          >
-            →
-          </button>
+            Aperture <span className="text-amber-500/80">&</span> Soul
+          </motion.h2>
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light max-w-md">
+            Capturing the silence between heartbeats. Every frame is a fragment
+            of an unseen story.
+          </p>
+        </div>
 
-          {/* Image Info Overlay */}
-          <div className="absolute bottom-4 left-4 text-white">
-            <h3 className="text-xl font-semibold">
-              {SAMPLE_PHOTOS[currentImage].title}
-            </h3>
-            <p className="text-sm text-gray-300">
-              {SAMPLE_PHOTOS[currentImage].year}
-            </p>
-          </div>
+        <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-6 border-l-0 lg:border-l border-white/10 lg:pl-12">
+          {[
+            { label: "Portraits", price: "$250" },
+            { label: "Cinematic", price: "$400" },
+            { label: "Editorial", price: "$350" },
+            { label: "Events", price: "Custom" },
+          ].map((service, i) => (
+            <div key={i} className="group">
+              <span className="text-[9px] font-mono text-amber-500/50 block mb-1 uppercase tracking-widest">
+                0{i + 1}
+              </span>
+              <h5 className="text-base md:text-lg text-white font-serif italic">
+                {service.label}
+              </h5>
+              <p className="text-[9px] text-gray-600 font-mono mt-1 uppercase">
+                {service.price}
+              </p>
+            </div>
+          ))}
 
-          {/* Image Indicators */}
-          <div className="absolute bottom-4 right-4 flex gap-2">
-            {SAMPLE_PHOTOS.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentImage(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === currentImage ? "bg-white w-8" : "bg-white/50"
-                }`}
-              />
-            ))}
+          <div className="col-span-2 md:col-span-4 mt-2">
+            <Link
+              href="/contact?intent=photography"
+              className="inline-block px-6 py-3 border border-amber-500/30 text-amber-500 text-[10px] font-mono uppercase tracking-[0.4em] hover:bg-amber-500 hover:text-black transition-all"
+            >
+              Book Session
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* Photography Services Dropdown */}
-      <div className="max-w-3xl mx-auto">
-        <div className="border border-white/20 rounded-lg overflow-hidden">
-          <button
-            onClick={() => setShowServices(!showServices)}
-            className="w-full px-6 py-4 bg-white/5 hover:bg-white/10 transition-all flex justify-between items-center text-white"
-          >
-            <span className="font-semibold text-lg">Photography Services</span>
-            <span className="text-2xl">{showServices ? "−" : "+"}</span>
-          </button>
-          {showServices && (
+      {/* 3. THE "FILM-STRIP" REEL - ADJUSTED FOR PORTRAIT IMAGES */}
+      <div className="relative z-10 h-[50vh] md:h-[65vh] flex gap-1.5 md:gap-2 overflow-hidden px-1 rounded-sm">
+        {SAMPLE_PHOTOS.map((photo, i) => {
+          const isActive = i === index;
+          return (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="px-6 py-6 bg-white/5 text-gray-300"
+              key={i}
+              onMouseEnter={() => setIndex(i)}
+              onClick={() => setIndex(i)}
+              initial={false}
+              animate={{
+                // REDUCED WIDTH: from 60% to 35% on desktop to prevent portrait photos from looking landscape
+                width: isActive ? (isMobile ? "75%" : "35%") : "8%",
+                opacity: isActive ? 1 : 0.4,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 30,
+                restDelta: 0.5,
+              }}
+              className="relative h-full cursor-pointer overflow-hidden border-x border-white/5 bg-neutral-900"
+              style={{ willChange: "width" }}
             >
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Professional Portraits
-                  </h4>
-                  <p className="text-sm">
-                    Timeless, expressive portraits crafted with an artist&apos;s
-                    eye
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Outdoor Photoshoots
-                  </h4>
-                  <p className="text-sm">
-                    Natural light sessions in beautiful landscapes
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Weddings & Pre-Wedding
-                  </h4>
-                  <p className="text-sm">
-                    Elegant, romantic portraits with documentary-style
-                    storytelling
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Events & Celebrations
-                  </h4>
-                  <p className="text-sm">
-                    Graduations, birthdays, and special occasions
-                  </p>
-                </div>
-              </div>
+              <Image
+                src={photo.src}
+                alt={photo.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                // object-cover ensures the image fills the container without stretching
+                className={`object-cover ${isActive ? "" : "brightness-50"}`}
+                priority={i < 3}
+              />
+
+              {/* Title and Year removed from here as requested */}
             </motion.div>
-          )}
-        </div>
+          );
+        })}
+      </div>
+
+      <div className="relative z-10 mt-6 flex justify-between items-center max-w-7xl mx-auto opacity-30">
+        <div className="h-[1px] flex-1 bg-white/10 mr-4" />
+        <span className="text-[9px] font-mono text-white tracking-widest">
+          0{index + 1} / 0{SAMPLE_PHOTOS.length}
+        </span>
       </div>
     </section>
   );

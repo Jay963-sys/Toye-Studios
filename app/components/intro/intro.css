@@ -2,13 +2,29 @@
 .intro-wrapper {
   position: fixed;
   inset: 0;
-  background: #111;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 9999;
   overflow: hidden;
+  background: transparent;
+}
+
+/* Dual Shutter System */
+.shutter {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50.5%; /* 0.5% overlap prevents a tiny gap in the middle */
+  background: #0a0a0a;
+  z-index: -1;
+}
+.shutter.top {
+  top: 0;
+}
+.shutter.bottom {
+  bottom: 0;
 }
 
 /* Skip Intro Button */
@@ -16,24 +32,37 @@
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.18);
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.05);
   color: white;
-  padding: 0.5rem 1.2rem;
-  border-radius: 30px;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 0.9rem;
-  transition: background 0.3s ease;
+  padding: 0.6rem 1.4rem;
+  border-radius: 40px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
 .intro-skip:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Brush Image */
-.intro-brush {
-  max-width: 85%;
+/* Content Layout */
+.intro-content {
+  text-align: center;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-brush-container {
+  overflow: hidden;
+  max-width: 600px;
+  width: 80%;
   margin-bottom: 1.5rem;
 }
 
@@ -43,99 +72,72 @@
   object-fit: contain;
 }
 
-/* Title */
+/* Typography */
 .intro-title {
   color: white;
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: 200;
   text-align: center;
-  letter-spacing: 3px;
+  text-transform: uppercase;
   margin: 0;
-  margin-top: 0.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #888888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Subtext */
 .intro-sub {
   color: #f1f1f1;
-  opacity: 0.8;
-  margin-top: 0.4rem;
+  opacity: 0.5;
+  margin-top: 0.8rem;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-/* Film Grain */
+/* Film Grain - The "Expensive" Look */
 .intro-grain {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background-image: url("/brand/noise.png");
-  opacity: 0.12;
-  mix-blend-mode: overlay;
-  animation: grain 1.3s steps(6) infinite;
+  opacity: 0.08; /* Kept very subtle */
+  mix-blend-mode: screen;
+  animation: grain 0.8s steps(10) infinite;
 }
 
 @keyframes grain {
-  0% {
+  0%,
+  100% {
     transform: translate(0, 0);
   }
   10% {
-    transform: translate(-5%, -5%);
-  }
-  20% {
-    transform: translate(3%, -3%);
+    transform: translate(-1%, -1%);
   }
   30% {
-    transform: translate(-3%, 3%);
-  }
-  40% {
-    transform: translate(5%, 5%);
+    transform: translate(1%, -1%);
   }
   50% {
-    transform: translate(-2%, 2%);
-  }
-  60% {
-    transform: translate(2%, -2%);
+    transform: translate(-0.5%, 1%);
   }
   70% {
-    transform: translate(-4%, 4%);
-  }
-  80% {
-    transform: translate(4%, -4%);
+    transform: translate(1%, 0.5%);
   }
   90% {
     transform: translate(-1%, 1%);
   }
-  100% {
-    transform: translate(0, 0);
-  }
 }
 
-/* MOBILE OPTIMIZATION */
+/* Responsive Scaling */
 @media (max-width: 768px) {
   .intro-title {
     font-size: 2.2rem;
-    letter-spacing: 2px;
   }
-
   .intro-sub {
-    font-size: 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
   }
-
-  .intro-skip {
-    padding: 0.4rem 1rem;
-    font-size: 0.8rem;
-  }
-
-  .intro-brush {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 480px) {
-  .intro-title {
-    font-size: 1.8rem;
-  }
-
-  .intro-sub {
-    font-size: 0.9rem;
+  .intro-brush-container {
+    width: 90%;
   }
 }

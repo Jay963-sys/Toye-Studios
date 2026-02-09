@@ -1,188 +1,146 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, ReactElement } from "react";
+import Link from "next/link";
 
-const EVENT_IMAGES = [
-  { src: "/hand/t14.jpg", title: "Paint with Olatoye Series" },
-  { src: "/brand/98.png", title: "Sip & Paint Event" },
-  { src: "/brand/888.png", title: "Paint with Olatoye Series" },
-  { src: "/brand/n.png", title: "Community Workshop" },
-  { src: "/brand/777.png", title: "Creative Experience" },
-  { src: "/hand/t28.jpg", title: "Paint with Olatoye Series" },
-  { src: "/hand/t40.jpg", title: "Sip & Paint Event" },
-  { src: "/hand/t43.jpg", title: "Community Workshop" },
-  { src: "/hand/t29.jpg", title: "Creative Experience" },
-  { src: "/hand/t30.jpg", title: "Creative Experience" },
-  { src: "/hand/t33.jpg", title: "Creative Experience" },
-  { src: "/hand/t34.jpg", title: "Creative Experience" },
-  { src: "/hand/t6.jpg", title: "Creative Experience" },
-  { src: "/hand/t7.jpg", title: "Creative Experience" },
-  { src: "/hand/t8.jpg", title: "Creative Experience" },
-  { src: "/hand/t9.jpg", title: "Creative Experience" },
-  { src: "/hand/t15.jpg", title: "Sip & Paint Event" },
-  { src: "/hand/t16.jpg", title: "Community Workshop" },
-  { src: "/hand/t23.jpg", title: "Creative Experience" },
-  { src: "/hand/t24.jpg", title: "Paint with Olatoye Series" },
+interface EventItem {
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+}
+
+const EVENTS: EventItem[] = [
+  {
+    title: "Creative Workshops",
+    description:
+      "Hands-on art sessions designed to unlock creativity and foster community through traditional techniques.",
+    image: "/hand/t8.jpg",
+    category: "EDUCATION",
+  },
+  {
+    title: "Brand Collaborations",
+    description:
+      "Custom creative partnerships that merge visual storytelling with corporate identity.",
+    image: "/hand/t37.jpg",
+    category: "PARTNERSHIP",
+  },
+  {
+    title: "Team Building",
+    description:
+      "Corporate experiences fostering deep collaboration and lateral thinking through the lens of portraiture.",
+    image: "/hand/t24.jpg",
+    category: "CORPORATE",
+  },
+  {
+    title: "The Sketch Social",
+    description:
+      "Relaxed drawing sessions in curated social settings, focusing on painting and communal energy.",
+    image: "/brand/98.png",
+    category: "SOCIAL",
+  },
 ];
 
-export default function CuratedEvents() {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [showServices, setShowServices] = useState(false);
-
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % EVENT_IMAGES.length);
-  };
-
-  const prevImage = () => {
-    setCurrentImage(
-      (prev) => (prev - 1 + EVENT_IMAGES.length) % EVENT_IMAGES.length
-    );
-  };
+export default function CuratedEvents(): ReactElement {
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16 border-t border-white/5 overflow-hidden">
-      {/* Soft vignette background */}
-      <div className="absolute inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.12)_0%,rgba(0,0,0,1)_75%)]" />
+    <section className="relative bg-black py-24 px-6 md:px-12 border-t border-white/5 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        {/* HEADER: Minimal and Clean */}
+        <div className="mb-20">
+          <span className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.8em] block mb-4">
+            The
+          </span>
+          <h3 className="text-5xl md:text-8xl font-serif italic text-white leading-none uppercase tracking-tighter">
+            Curated <span className="text-amber-500">Events</span>
+          </h3>
+        </div>
 
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2 }}
-        className="text-center mb-12 px-2 sm:px-0"
-      >
-        <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif text-white mb-4">
-          Curated Events
-        </h3>
-        <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
-          Beyond creating art, I curate transformative experiences that bring
-          people together through creativity. From interactive workshops to
-          brand collaborations, each event is thoughtfully designed to inspire,
-          engage, and create lasting memories.
-        </p>
-      </motion.div>
-
-      {/* Carousel Section */}
-      <div className="relative max-w-4xl mx-auto mb-12">
-        <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-          <Image
-            src={EVENT_IMAGES[currentImage].src}
-            alt={EVENT_IMAGES[currentImage].title}
-            fill
-            className="object-cover"
-          />
-
-          {/* Carousel Controls */}
-          <button
-            onClick={prevImage}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all z-10"
-          >
-            ←
-          </button>
-          <button
-            onClick={nextImage}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all z-10"
-          >
-            →
-          </button>
-
-          {/* Image Info Overlay */}
-          <div className="absolute bottom-4 left-4 text-white">
-            <h3 className="text-xl font-semibold">
-              {EVENT_IMAGES[currentImage].title}
-            </h3>
-          </div>
-
-          {/* Image Indicators */}
-          <div className="absolute bottom-4 right-4 flex gap-2">
-            {EVENT_IMAGES.map((_, idx) => (
-              <button
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          {/* LEFT: THE INTERACTIVE MENU (Minimal visual noise) */}
+          <div className="lg:col-span-5 space-y-2">
+            {EVENTS.map((event, idx) => (
+              <div
                 key={idx}
-                onClick={() => setCurrentImage(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === currentImage ? "bg-white w-8" : "bg-white/50"
-                }`}
-              />
+                onMouseEnter={() => setActiveIndex(idx)}
+                className="group py-8 border-b border-white/5 cursor-pointer relative"
+              >
+                <div className="flex items-baseline gap-4 relative z-10">
+                  <span
+                    className={`font-mono text-[10px] transition-colors duration-500 ${activeIndex === idx ? "text-amber-500" : "text-white/20"}`}
+                  >
+                    0{idx + 1}
+                  </span>
+                  <h4
+                    className={`text-3xl md:text-5xl font-light transition-all duration-500 ${activeIndex === idx ? "text-white translate-x-4" : "text-white/30 group-hover:text-white/60"}`}
+                  >
+                    {event.title}
+                  </h4>
+                </div>
+
+                {/* Expandable description only for the active item */}
+                <AnimatePresence>
+                  {activeIndex === idx && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="mt-6 text-gray-500 font-light leading-relaxed pl-8 max-w-sm">
+                        {event.description}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </div>
-        </div>
-      </div>
 
-      {/* Services Dropdown */}
-      <div className="max-w-3xl mx-auto">
-        <div className="border border-white/20 rounded-lg overflow-hidden">
-          <button
-            onClick={() => setShowServices(!showServices)}
-            className="w-full px-6 py-4 bg-white/5 hover:bg-white/10 transition-all flex justify-between items-center text-white"
-          >
-            <span className="font-semibold text-lg">Event Services</span>
-            <span className="text-2xl">{showServices ? "−" : "+"}</span>
-          </button>
-          {showServices && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="px-6 py-6 bg-white/5 text-gray-300"
-            >
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Creative Workshops
-                  </h4>
-                  <p className="text-sm">
-                    Hands-on art sessions designed to unlock creativity and
-                    build community
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Brand Collaborations
-                  </h4>
-                  <p className="text-sm">
-                    Custom creative partnerships and campaigns for businesses
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Team Building Art Offerings
-                  </h4>
-                  <p className="text-sm">
-                    Corporate art experiences that foster collaboration and
-                    creativity
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Participatory Art Programs
-                  </h4>
-                  <p className="text-sm">
-                    Community engagement through interactive art installations
-                    and projects
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    Curated & Creative Experiences
-                  </h4>
-                  <p className="text-sm">
-                    Bespoke events tailored to your vision and audience
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-2">
-                    The Sketch Social
-                  </h4>
-                  <p className="text-sm">
-                    Introduction to drawing and charcoal techniques in a
-                    relaxed, social setting
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          )}
+          {/* RIGHT: THE SINGLE FOCAL IMAGE (Zero overwhelm) */}
+          <div className="lg:col-span-7 relative">
+            <div className="relative aspect-[16/10] md:aspect-[4/3] w-full overflow-hidden rounded-sm bg-white/5 shadow-2xl">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-full h-full"
+                >
+                  <Image
+                    src={EVENTS[activeIndex].image}
+                    alt={EVENTS[activeIndex].title}
+                    fill
+                    className="object-cover transition-all duration-1000"
+                  />
+
+                  {/* Category Badge */}
+                  <div className="absolute top-6 right-6 px-4 py-2 bg-black/40 backdrop-blur-md border border-white/10">
+                    <span className="text-[10px] font-mono text-amber-500 uppercase tracking-widest">
+                      {EVENTS[activeIndex].category}
+                    </span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            <div className="mt-12 text-center">
+              <motion.div whileTap={{ scale: 0.95 }}>
+                <Link
+                  href="/contact?intent=event"
+                  className="inline-block px-8 py-3 bg-white text-black text-xs uppercase tracking-widest font-bold hover:bg-amber-500 transition-colors duration-300"
+                >
+                  Book Event Inquiry
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Subtle background detail to break the "flat" look */}
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
+          </div>
         </div>
       </div>
     </section>

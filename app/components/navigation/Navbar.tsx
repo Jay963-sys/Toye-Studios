@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
 
@@ -12,52 +11,83 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className={`fixed top-0 z-50 w-full backdrop-blur-xl transition-all ${
-          scrolled ? "bg-[#0b0b0b]/70 shadow-lg" : "bg-transparent"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`fixed top-0 z-[60] w-full transition-all duration-500 ${
+          scrolled
+            ? "py-4 bg-black/40 backdrop-blur-md bg-gradient-to-b from-black/40 to-black/30"
+            : "py-8 bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          {/* Logo */}
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+          {/* Logo - Kinetic hover */}
           <Link
             href="/"
-            className="text-xl font-semibold tracking-wide text-white"
+            className="group relative z-[70]"
+            onClick={() => {
+              if (open) {
+                setOpen(false);
+                document.body.style.overflow = "";
+              }
+            }}
           >
-            Toye Studios
+            <motion.span className="text-lg font-serif italic tracking-tighter text-white">
+              TOYE{" "}
+              <span className="font-light not-italic text-amber-500/80 group-hover:text-amber-400 transition-colors">
+                STUDIOS
+              </span>
+            </motion.span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden gap-10 md:flex">
-            <NavLink href="/artworks">Artworks</NavLink>
-            <NavLink href="/photography">Photography</NavLink>
-            <NavLink href="/teaching">Teaching</NavLink>
-            <NavLink href="/about">About</NavLink>
-            <NavLink href="/contact">Contact</NavLink>
+          {/* Desktop Nav - Clean & Spaced */}
+          <div className="hidden gap-12 md:flex">
+            {["Artworks", "Photography", "Teaching", "About", "Contact"].map(
+              (item) => (
+                <NavLink key={item} href={`/${item.toLowerCase()}`}>
+                  {item}
+                </NavLink>
+              ),
+            )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle - Custom Hamburger */}
           <button
-            className="md:hidden text-white"
-            onClick={() => setOpen(true)}
+            className="group flex flex-col items-end gap-1.5 md:hidden z-[70]"
+            onClick={() => setOpen(!open)}
           >
-            <FiMenu size={28} />
+            <div
+              className={`h-[1px] bg-white transition-all duration-300 ${open ? "w-8 rotate-45 translate-y-2" : "w-8"}`}
+            />
+            <div
+              className={`h-[1px] bg-amber-500 transition-all duration-300 ${open ? "opacity-0" : "w-5"}`}
+            />
+            <div
+              className={`h-[1px] bg-white transition-all duration-300 ${open ? "w-8 -rotate-45 -translate-y-2" : "w-8"}`}
+            />
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {open && <MobileMenu onClose={() => setOpen(false)} />}
       </AnimatePresence>
@@ -76,23 +106,20 @@ function NavLink({
   const isActive = pathname === href;
 
   return (
-    <Link href={href} className="relative group">
+    <Link href={href} className="relative group flex flex-col items-center">
       <span
-        className={`text-sm uppercase tracking-wider transition ${
-          isActive ? "text-white" : "text-gray-300 group-hover:text-[#7c7877]"
+        className={`text-[10px] uppercase tracking-[0.3em] transition-colors duration-300 ${
+          isActive ? "text-amber-500" : "text-white/50 group-hover:text-white"
         }`}
       >
         {children}
       </span>
-
-      {/* Underline animation */}
-      <span
-        className={`absolute left-0 -bottom-1 h-[2px] rounded-full bg-white transition-all duration-300 ${
-          isActive
-            ? "w-full opacity-100"
-            : "w-0 opacity-0 group-hover:w-full group-hover:opacity-60"
-        }`}
-      ></span>
+      {isActive && (
+        <motion.div
+          layoutId="navDot"
+          className="absolute -bottom-2 w-1 h-1 rounded-full bg-amber-500"
+        />
+      )}
     </Link>
   );
 }

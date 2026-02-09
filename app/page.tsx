@@ -1,95 +1,109 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import CinematicIntro from "./components/intro/CinematicIntro";
 import Showcase from "./components/home/Showcase";
-import FeaturedWorks from "./components/home/FeaturedWorks";
-import Workshops from "./components/home/Workshops";
-import Photography from "./components/home/Photography";
-import PhotographyServices from "./components/home/PhotographyServices";
-import ArtCurator from "./components/home/ArtCurator";
-import PortraitArtistSection from "./components/home/PortraitArtistSection";
 import PhotographySection from "./components/home/PhotographySection";
 import CuratedEventsSection from "./components/home/CuratedEventsSection";
 
 export default function HomePage() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
-    <div className="relative overflow-hidden">
-      {/* GLOBAL BACKGROUND */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        {/* Stronger, more visible blobs */}
+    <div className="relative bg-black selection:bg-amber-500/30 selection:text-amber-200">
+      {/* 1. GLOBAL PROGRESS TRACKER (Zen Detail) */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-amber-500 origin-left z-[100]"
+        style={{ scaleX }}
+      />
+
+      {/* 2. OPTIMIZED BACKGROUND AMBIENCE */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        {/* Slow moving light aura - Purple/Indigo shifted to subtle Amber/Slate for better art focus */}
         <motion.div
           animate={{
-            x: [0, 80, -80, 0],
-            y: [0, -60, 60, 0],
-            opacity: [0.35, 0.55, 0.45, 0.35],
+            x: [0, 40, -40, 0],
+            opacity: [0.1, 0.2, 0.15, 0.1],
           }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute w-[80vw] h-[80vw] bg-purple-600/30 rounded-full blur-[160px] top-[-20%] left-[-10%]"
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute w-[60vw] h-[60vw] bg-amber-900/10 rounded-full blur-[160px] top-[-10%] left-[-10%]"
         />
 
-        <motion.div
-          animate={{
-            x: [0, -70, 90, 0],
-            y: [0, 40, -40, 0],
-            opacity: [0.3, 0.55, 0.4, 0.3],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute w-[75vw] h-[75vw] bg-indigo-500/30 rounded-full blur-[180px] bottom-[-20%] right-[-10%]"
-        />
+        {/* Grain Texture */}
+        <div className="absolute inset-0 bg-[url('/brand/noise.png')] opacity-[0.05] mix-blend-overlay" />
 
-        {/* Film Grain */}
-        <div className="absolute inset-0 bg-[url('/brand/noise.png')] opacity-[0.15] mix-blend-soft-light" />
-
-        {/* Softer vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(0,0,0,0)_45%,rgba(0,0,0,0.85))]" />
+        {/* Deep Vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,black_90%)]" />
       </div>
 
-      <section className="relative pt-40 pb-28 flex flex-col items-center text-center px-6">
-        {/* Soft vignette glow */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.07),rgba(0,0,0,0.9))]" />
+      {/* 3. THE WELCOME (Clean Minimalist Hero) */}
+      <section className="relative h-[80vh] flex flex-col items-center justify-center text-center px-6">
+        <div className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2 }}
+            className="flex flex-col items-center"
+          >
+            <span className="text-[10px] uppercase tracking-[1em] text-amber-500/60 mb-8 block">
+              The Digital Atelier
+            </span>
+            <h1 className="text-5xl md:text-8xl font-serif tracking-tighter text-white leading-none">
+              TOYE{" "}
+              <span className="italic font-light text-white/40">STUDIOS</span>
+            </h1>
+
+            {/* Minimalist Separator */}
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "80px" }}
+              transition={{ duration: 1.5, delay: 0.5, ease: "circOut" }}
+              className="h-px bg-amber-500/40 my-8"
+            />
+
+            <p className="text-sm md:text-base text-gray-400 font-light tracking-[0.3em] uppercase">
+              Portraiture • Photography • Curation
+            </p>
+          </motion.div>
         </div>
 
-        {/* Main Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-4xl md:text-6xl font-serif tracking-wide text-white relative z-10"
-        >
-          Welcome to <span className="text-white">Toye Studios</span>
-        </motion.h1>
-
-        {/* Divider Line */}
+        {/* Scroll Indicator */}
         <motion.div
-          initial={{ width: 0, opacity: 0 }}
-          whileInView={{ width: "160px", opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="h-px bg-white/40 mt-6 mb-4 relative z-10"
-        />
-
-        {/* Subheading */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="text-lg md:text-xl text-gray-300 italic tracking-wide relative z-10"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          Artistry. Storytelling. Timeless visuals.
-        </motion.p>
+          <div className="w-px h-12 bg-gradient-to-b from-amber-500/50 to-transparent" />
+        </motion.div>
       </section>
 
-      <CinematicIntro />
-      <Showcase />
-      {/* <PortraitArtistSection /> */}
-      <PhotographySection />
-      <CuratedEventsSection />
-      {/* <FeaturedWorks /> */}
-      {/* <Photography /> */}
-      {/* <PhotographyServices /> */}
-      {/* <ArtCurator /> */}
-      {/* <Workshops /> */}
+      {/* 4. CONTENT BLOCKS (The Discipline Journey) */}
+      <main className="relative">
+        {/* meet the artist & portraiture */}
+        <div className="mb-32 md:mb-60">
+          <Showcase />
+        </div>
+
+        {/* Cinematic Narrative */}
+        <div className="mb-32 md:mb-60">
+          <CinematicIntro />
+        </div>
+
+        {/* Light & Lens */}
+        <div className="mb-32 md:mb-60">
+          <PhotographySection />
+        </div>
+
+        {/* Community & Events */}
+        <div className="mb-32">
+          <CuratedEventsSection />
+        </div>
+      </main>
     </div>
   );
 }

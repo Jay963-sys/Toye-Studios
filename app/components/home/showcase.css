@@ -1,6 +1,6 @@
 /* Section wrapper */
 .showcase-container {
-  padding: 100px 0;
+  padding: 120px 0 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,44 +8,94 @@
   position: relative;
 }
 
-/* Spotlight container */
+/* Noise texture for subtle grain */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/********************
+ *   Spotlight/Hero
+ ********************/
 .showcase-spotlight {
   position: relative;
   width: 92%;
   max-width: 950px;
-  border-radius: 20px;
+  border-radius: 24px;
   overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(255, 140, 0, 0.08);
 }
 
-/* Main image */
 .spotlight-img {
   width: 100%;
-  height: auto;
+  height: 600px;
   object-fit: cover;
+  object-position: center;
   display: block;
+  transition: transform 0.6s ease-out;
+}
+
+.showcase-spotlight:hover .spotlight-img {
+  transform: scale(1.02);
 }
 
 /* Dark fade at bottom */
 .spotlight-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 35%, #000 80%);
-  opacity: 0.55;
+  background: linear-gradient(
+    to bottom,
+    transparent 30%,
+    rgba(0, 0, 0, 0.4) 60%,
+    rgba(0, 0, 0, 0.85) 85%
+  );
   pointer-events: none;
+  z-index: 3;
 }
 
-/* Soft white vignette glow */
-.white-vignette {
+/* Corner decorative accents */
+.corner-accent {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.15),
-    transparent 70%
-  );
-  mix-blend-mode: screen;
-  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  z-index: 4;
+  transition: all 0.4s ease;
+}
+
+.corner-tl {
+  top: 20px;
+  left: 20px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-tr {
+  top: 20px;
+  right: 20px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-bl {
+  bottom: 20px;
+  left: 20px;
+  border-right: none;
+  border-top: none;
+}
+
+.corner-br {
+  bottom: 20px;
+  right: 20px;
+  border-left: none;
+  border-top: none;
+}
+
+.showcase-spotlight:hover .corner-accent {
+  width: 50px;
+  height: 50px;
+  border-color: rgba(251, 191, 36, 0.5);
 }
 
 /* Floating text */
@@ -54,7 +104,10 @@
   bottom: 18%;
   left: 7%;
   z-index: 5;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 70, 0, 0.5);
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(251, 191, 36, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.6);
   pointer-events: none;
 }
 
@@ -69,58 +122,208 @@
 }
 
 .desc-heading {
-  font-size: 2.1rem;
+  font-size: 2.4rem;
   font-weight: 600;
-  color: #fff;
-  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
   font-family: "Georgia", serif;
+  letter-spacing: -0.02em;
 }
 
 .desc-text {
   color: #d6d6d6;
-  font-size: 1.1rem;
-  line-height: 1.75rem;
-}
-
-.desc-bullets {
-  color: #f0f0f0;
   font-size: 1.15rem;
-  letter-spacing: 1px;
+  line-height: 1.85rem;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 /********************
- *   Fade-In Animation
+ *   Enhanced Carousel
  ********************/
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(26px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.carousel-wrapper {
+  padding: 8px;
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.9s ease-out forwards;
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.animate-fade-in-up.delay-150 {
-  animation-delay: 0.12s;
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
 }
 
-.animate-fade-in-up.delay-300 {
-  animation-delay: 0.24s;
+.carousel-btn-left {
+  left: 20px;
+}
+
+.carousel-btn-right {
+  right: 20px;
+}
+
+.indicator-dot {
+  padding: 4px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
 }
 
 /********************
- *   Mobile Tweaks
+ *   Enhanced Dropdowns
+ ********************/
+.dropdown-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-card:hover {
+  border-color: rgba(251, 191, 36, 0.2);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(251, 191, 36, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dropdown-header {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(251, 191, 36, 0.05),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.dropdown-header:hover::before {
+  left: 100%;
+}
+
+.dropdown-header:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.15),
+    rgba(251, 191, 36, 0.05)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(251, 191, 36);
+  transition: all 0.3s ease;
+}
+
+.dropdown-header:hover .icon-wrapper {
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.25),
+    rgba(251, 191, 36, 0.1)
+  );
+  transform: scale(1.05);
+}
+
+.dropdown-icon {
+  color: rgba(251, 191, 36, 0.7);
+  transition: color 0.3s ease;
+}
+
+.dropdown-content {
+  padding: 1.75rem 2rem 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.1)
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/********************
+ *   Mobile Responsive
  ********************/
 @media (max-width: 768px) {
   .enhanced-spotlight-title {
     bottom: 14%;
     left: 5%;
+  }
+
+  .carousel-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .carousel-btn-left {
+    left: 12px;
+  }
+
+  .carousel-btn-right {
+    right: 12px;
+  }
+
+  .corner-accent {
+    width: 30px;
+    height: 30px;
+  }
+
+  .showcase-spotlight:hover .corner-accent {
+    width: 35px;
+    height: 35px;
   }
 }
 
@@ -128,34 +331,46 @@
   .enhanced-spotlight-title {
     bottom: 12%;
     left: 4%;
-    text-align: left;
   }
 
   .showcase-container {
     gap: 60px;
+    padding: 80px 0 60px;
+  }
+
+  .desc-heading {
+    font-size: 1.8rem;
   }
 
   .desc-text {
     font-size: 1rem;
+    line-height: 1.65rem;
+  }
+
+  .dropdown-header {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .dropdown-content {
+    padding: 1.5rem 1.5rem 1.75rem;
+  }
+
+  .icon-wrapper {
+    width: 36px;
+    height: 36px;
+  }
+
+  .spotlight-img {
+    height: 450px;
   }
 }
 
-.vignette-bg {
-  z-index: 2;
-}
-
-.spotlight-overlay {
-  z-index: 3;
-}
-
-.enhanced-spotlight-title {
-  z-index: 4;
-}
-
-.spotlight-img {
-  width: 100%;
-  height: 600px; /* or whatever height you prefer */
-  object-fit: cover; /* fills box without stretching */
-  object-position: center;
-  border-radius: 12px;
+/* Smooth scrolling and reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-img,
+  .carousel-btn,
+  .dropdown-card,
+  .corner-accent {
+    transition: none;
+  }
 }
