@@ -1,34 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
-
 @import "tailwindcss";
-
-:root {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-border: hsl(var(--border));
-}
 
 @layer base {
   :root {
     color-scheme: dark;
-  }
-
-  .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
   }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  @theme {
+    --font-serif: var(--font-courier-prime), monospace;
+    --font-sans: var(--font-inter), sans-serif;
+    --font-mono: var(--font-space-mono), monospace;
   }
 
-  * {
-    border: 1px solid var(--color-border);
+  body {
+    font-family: var(--font-inter), sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-courier-prime), monospace;
+  }
+
+  /* Explicitly override Tailwind's font-serif class */
+  .font-serif {
+    font-family: var(--font-courier-prime), monospace !important;
   }
 }

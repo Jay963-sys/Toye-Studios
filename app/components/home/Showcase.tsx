@@ -54,7 +54,10 @@ export default function Showcase(): ReactElement {
             <span className="text-amber-500 font-mono text-xs uppercase tracking-[0.5em]">
               The Philosophy
             </span>
-            <h2 className="text-5xl md:text-7xl font-serif italic leading-tight">
+            <h2
+              className="text-5xl md:text-7xl leading-tight"
+              style={{ fontFamily: "var(--font-courier-prime), monospace" }}
+            >
               Capturing the <br />
               <span className="text-amber-500/90">Silent Dialogue</span>
             </h2>
@@ -76,7 +79,13 @@ export default function Showcase(): ReactElement {
               <span className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.4em]">
                 Portfolio
               </span>
-              <h3 className="text-3xl font-light uppercase tracking-tighter mt-2">
+              <h3
+                className="text-3xl uppercase tracking-tighter mt-2"
+                style={{
+                  fontFamily: "var(--font-courier-prime), monospace",
+                  fontWeight: 300,
+                }}
+              >
                 Selected Works
               </h3>
             </div>
@@ -135,7 +144,15 @@ export default function Showcase(): ReactElement {
             <span className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.8em]">
               Atelier Services
             </span>
-            <h3 className="text-4xl md:text-6xl font-light mt-4">Offerings</h3>
+            <h3
+              className="text-4xl md:text-6xl mt-4"
+              style={{
+                fontFamily: "var(--font-courier-prime), monospace",
+                fontWeight: 300,
+              }}
+            >
+              Offerings
+            </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
@@ -147,7 +164,10 @@ export default function Showcase(): ReactElement {
               className="space-y-8"
             >
               <div className="space-y-2">
-                <h4 className="text-2xl font-serif italic text-amber-500">
+                <h4
+                  className="text-2xl text-amber-500"
+                  style={{ fontFamily: "var(--font-courier-prime), monospace" }}
+                >
                   Art Classes
                 </h4>
                 <p className="text-gray-400 text-sm">
@@ -183,7 +203,10 @@ export default function Showcase(): ReactElement {
               className="space-y-8"
             >
               <div className="space-y-2">
-                <h4 className="text-2xl font-serif italic text-amber-500">
+                <h4
+                  className="text-2xl text-amber-500"
+                  style={{ fontFamily: "var(--font-courier-prime), monospace" }}
+                >
                   Art Commissions
                 </h4>
                 <p className="text-gray-400 text-sm">

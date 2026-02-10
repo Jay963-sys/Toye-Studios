@@ -51,9 +51,12 @@ export default function Navbar() {
               }
             }}
           >
-            <motion.span className="text-lg font-serif italic tracking-tighter text-white">
+            <motion.span
+              className="text-lg tracking-tighter text-white"
+              style={{ fontFamily: "var(--font-courier-prime), monospace" }}
+            >
               TOYE{" "}
-              <span className="font-light not-italic text-amber-500/80 group-hover:text-amber-400 transition-colors">
+              <span className="font-light text-amber-500/80 group-hover:text-amber-400 transition-colors">
                 STUDIOS
               </span>
             </motion.span>

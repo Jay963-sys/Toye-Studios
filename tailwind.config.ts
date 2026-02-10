@@ -13,16 +13,21 @@ const config: Config = {
           DEFAULT: "#4ea4ff",
           600: "#3b82f6",
         },
+        studioAmber: {
+          500: "#f59e0b",
+        },
       },
       boxShadow: {
         soft: "0 6px 20px rgba(0,0,0,0.35)",
       },
-    },
-    fontFamily: {
-      sans: ["DM Sans", "sans-serif"],
-      mona: ["Mona Sans", "sans-serif"],
+      fontFamily: {
+        serif: ["var(--font-courier-prime)", "monospace"],
+        sans: ["var(--font-inter)", "sans-serif"],
+        mono: ["var(--font-space-mono)", "monospace"],
+      },
     },
   },
+  plugins: [],
 };
 
 export default config;

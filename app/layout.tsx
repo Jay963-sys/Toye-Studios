@@ -1,15 +1,26 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
 import Navbar from "./components/navigation/Navbar";
 import Footer from "./components/navigation/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
+import { Courier_Prime, Inter, Space_Mono } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-inter",
+});
+
+const courierPrime = Courier_Prime({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-courier-prime",
+});
+
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-space-mono",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +45,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#0B0B0B] text-white">
       <head>
-        {/* Google Tag Manager */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -50,9 +60,8 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased tracking-tight`}
+        className={`${inter.variable} ${courierPrime.variable} ${spaceMono.variable} antialiased`}
       >
-        {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NXGV6SR6"
@@ -63,7 +72,7 @@ export default function RootLayout({
         </noscript>
 
         <Navbar />
-        <main className="min-h-screen pt-20">{children}</main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
         <SpeedInsights />
       </body>
