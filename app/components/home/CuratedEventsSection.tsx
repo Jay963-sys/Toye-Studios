@@ -53,7 +53,7 @@ export default function CuratedEvents(): ReactElement {
           <span className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.8em] block mb-4">
             The
           </span>
-          <h3 className="text-5xl md:text-8xl font-serif italic text-white leading-none uppercase tracking-tighter">
+          <h3 className="text-5xl md:text-8xl font-serif text-white leading-none uppercase tracking-tighter">
             Curated <span className="text-amber-500">Events</span>
           </h3>
         </div>

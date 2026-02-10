@@ -64,7 +64,7 @@ export default function Photography(): ReactElement {
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-7xl font-serif italic text-white mb-4 uppercase tracking-tighter"
+            className="text-4xl md:text-7xl font-serif text-white mb-4 uppercase tracking-tighter"
           >
             Aperture <span className="text-amber-500/80">&</span> Soul
           </motion.h2>
