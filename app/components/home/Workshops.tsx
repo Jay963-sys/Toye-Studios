@@ -64,7 +64,6 @@ export default function Workshops() {
   const [selectedWorkshop, setSelectedWorkshop] = useState<Workshop | null>(
     null
   );
-  const [focusedField, setFocusedField] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 

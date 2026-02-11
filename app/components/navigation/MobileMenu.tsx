@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
+import Clock from "./Clock";
 
 const menuItems = [
   { name: "Artworks", path: "/artworks" },
@@ -33,6 +34,12 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="fixed inset-0 z-[55] bg-black flex flex-col justify-center px-12"
     >
+      {/* 1. STUDIO CLOCK - Top Left Position */}
+      <div className="absolute top-20 left-12 z-90">
+        <Clock />
+      </div>
+
+      {/* 2. BACKGROUND TEXTURE */}
       <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
 
       <nav className="relative z-10 flex flex-col gap-6">

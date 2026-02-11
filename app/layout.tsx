@@ -5,6 +5,7 @@ import Footer from "./components/navigation/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { Courier_Prime, Inter, Space_Mono } from "next/font/google";
+import CookieBanner from "./components/navigation/CookieBanner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -74,6 +75,7 @@ export default function RootLayout({
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <CookieBanner />
         <SpeedInsights />
       </body>
     </html>

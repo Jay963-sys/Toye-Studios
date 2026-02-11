@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
+import Clock from "./Clock";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -62,17 +63,18 @@ export default function Navbar() {
             </motion.span>
           </Link>
 
-          {/* Desktop Nav - Clean & Spaced */}
-          <div className="hidden gap-12 md:flex">
-            {["Artworks", "Photography", "Teaching", "About", "Contact"].map(
-              (item) => (
-                <NavLink key={item} href={`/${item.toLowerCase()}`}>
-                  {item}
-                </NavLink>
-              ),
-            )}
+          <div className="hidden md:flex items-center gap-12">
+            <div className="flex gap-12">
+              {["Artworks", "Photography", "Teaching", "About", "Contact"].map(
+                (item) => (
+                  <NavLink key={item} href={`/${item.toLowerCase()}`}>
+                    {item}
+                  </NavLink>
+                ),
+              )}
+            </div>
+            <Clock /> {/* Add the clock here */}
           </div>
-
           {/* Mobile Menu Toggle - Custom Hamburger */}
           <button
             className="group flex flex-col items-end gap-1.5 md:hidden z-[70]"

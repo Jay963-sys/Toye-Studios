@@ -66,6 +66,8 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <FooterLink href="/about">About</FooterLink>
               <FooterLink href="/contact">Contact</FooterLink>
+              {/* Added Privacy Policy here */}
+              <FooterLink href="/privacy">Privacy Policy</FooterLink>
             </ul>
           </div>
         </div>
