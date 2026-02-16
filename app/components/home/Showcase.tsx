@@ -6,9 +6,10 @@ import Link from "next/link";
 
 const ARTIST_IMAGE = "/brand/p.png";
 const PORTFOLIO_IMAGES = [
-  "/hand/t41.jpg",
-  "/hand/t17.jpg",
   "/hand/t38.png",
+
+  "/hand/t17.jpg",
+  "/hand/t41.jpg",
   "/hand/t36.jpg",
   "/hand/t42.jpg",
   "/hand/t10.jpg",
@@ -25,7 +26,7 @@ export default function Showcase(): ReactElement {
   return (
     <section className="bg-black text-white py-24 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
-        {/* --- PART 1: THE ARTIST (Static Anchor) --- */}
+        {/* --- PART 1: THE APPROACH (Exact Copy Match) --- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-40">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -52,40 +53,43 @@ export default function Showcase(): ReactElement {
             className="space-y-8"
           >
             <span className="text-amber-500 font-mono text-xs uppercase tracking-[0.5em]">
-              The Philosophy
+              My Approach
             </span>
-            <h2
-              className="text-5xl md:text-7xl leading-tight"
-              style={{ fontFamily: "var(--font-courier-prime), monospace" }}
-            >
-              Capturing the <br />
-              <span className="text-amber-500/90">Silent Dialogue</span>
+            <h2 className="text-5xl md:text-7xl leading-tight font-serif tracking-tighter uppercase">
+              Capturing Real <br />
+              <span className="text-amber-500/90">Moments & Emotion</span>
             </h2>
-            <blockquote className="border-l-2 border-amber-500/30 pl-6 italic text-xl md:text-2xl text-gray-300 font-light max-w-lg">
-              Art isn&apos;t just a reflection of what we see, but a testament
-              to what we feel in the quiet moments of observation.
-            </blockquote>
-            <p className="text-gray-500 max-w-md leading-relaxed">
-              With over a decade of dedication to hyperrealism, Olatoye
-              transforms charcoal and canvas into living narratives.
+
+            <p className="text-gray-300 text-xl md:text-2xl font-light max-w-xl leading-relaxed italic border-l-2 border-amber-500/30 pl-6">
+              `&quot;I believe the best images—whether drawn or
+              photographed—come from genuine connection.&quote;`
             </p>
+
+            <p className="text-gray-400 max-w-lg leading-relaxed text-lg">
+              With over 10 years of experience in hyperrealism and photography,
+              my goal is simple: to create artwork that feels true to you. I
+              don&apos;t just capture what you look like; I capture who you are.
+            </p>
+
+            <div className="pt-4">
+              <Link
+                href="/contact"
+                className="px-10 py-4 bg-amber-500 text-black font-mono text-[10px] uppercase tracking-[0.4em] hover:bg-white transition-all duration-500"
+              >
+                Start a Conversation
+              </Link>
+            </div>
           </motion.div>
         </div>
 
-        {/* --- PART 2: THE WORK (Discovery Gallery) --- */}
+        {/* --- PART 2: THE WORK --- */}
         <div className="pt-20 border-t border-white/5 mb-40">
           <div className="flex justify-between items-end mb-12">
             <div>
               <span className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.4em]">
                 Portfolio
               </span>
-              <h3
-                className="text-3xl uppercase tracking-tighter mt-2"
-                style={{
-                  fontFamily: "var(--font-courier-prime), monospace",
-                  fontWeight: 300,
-                }}
-              >
+              <h3 className="text-3xl font-serif uppercase tracking-tighter mt-2 italic">
                 Selected Works
               </h3>
             </div>
@@ -95,7 +99,7 @@ export default function Showcase(): ReactElement {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
-            <div className="relative w-full lg:w-2/3 aspect-[16/10] bg-white/5 rounded-sm overflow-hidden shadow-2xl">
+            <div className="relative w-full lg:w-2/3 aspect-[16/10] bg-white/5 rounded-sm overflow-hidden shadow-2xl border border-white/5">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeWork}
@@ -138,63 +142,70 @@ export default function Showcase(): ReactElement {
           </div>
         </div>
 
-        {/* --- PART 3: SERVICES (The Atelier) --- */}
+        {/* --- PART 3: OFFERINGS --- */}
         <div className="pt-20 border-t border-white/5">
           <div className="text-center mb-20">
             <span className="text-amber-500 font-mono text-[10px] uppercase tracking-[0.8em]">
-              Atelier Services
+              Studio Services
             </span>
-            <h3
-              className="text-4xl md:text-6xl mt-4"
-              style={{
-                fontFamily: "var(--font-courier-prime), monospace",
-                fontWeight: 300,
-              }}
-            >
-              Offerings
+            <h3 className="text-4xl md:text-6xl mt-4 font-serif tracking-tighter uppercase">
+              Fine Art & Teaching
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
-            {/* Art Classes */}
+            {/* Art Workshops */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <div className="space-y-2">
-                <h4
-                  className="text-2xl text-amber-500"
-                  style={{ fontFamily: "var(--font-courier-prime), monospace" }}
-                >
+              <div className="space-y-4">
+                <h4 className="text-2xl text-amber-500 font-serif uppercase">
                   Art Classes
                 </h4>
-                <p className="text-gray-400 text-sm">
-                  Learn to create with personalized instruction:
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Perfect for beginners and groups. Learn to find your voice
+                  through hands-on, personalized instruction.
                 </p>
               </div>
-              <ul className="space-y-4 text-gray-300 font-light border-l border-white/10 pl-6">
-                <li>Private one-on-one sessions</li>
-                <li>Group workshops</li>
-                <li>Corporate team-building events</li>
-                <li>Special occasion classes</li>
-                <li>Online tutorials</li>
+              <ul className="space-y-4 text-gray-300 font-light border-l border-white/10 pl-6 text-sm uppercase tracking-widest font-mono">
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Private
+                  1-on-1 Sessions
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Group
+                  Workshops
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Corporate
+                  Team Building
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Special
+                  Events Classes
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Online
+                  Classes
+                </li>
               </ul>
               <div className="pt-4">
-                <p className="text-xs font-mono text-gray-500 mb-4 uppercase">
-                  Sessions starting from £75
+                <p className="text-xs font-mono text-gray-600 mb-6 uppercase tracking-widest">
+                  Sessions from £75
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-block px-8 py-3 bg-white text-black text-xs uppercase tracking-widest font-bold hover:bg-amber-500 transition-colors duration-300"
+                  className="inline-block px-8 py-4 bg-white text-black text-[10px] font-mono uppercase tracking-[0.3em] hover:bg-amber-500 transition-all duration-500"
                 >
-                  Book Class
+                  Book Workshop
                 </Link>
               </div>
             </motion.div>
 
-            {/* Art Commissions */}
+            {/* Commissions */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -202,31 +213,44 @@ export default function Showcase(): ReactElement {
               transition={{ delay: 0.2 }}
               className="space-y-8"
             >
-              <div className="space-y-2">
-                <h4
-                  className="text-2xl text-amber-500"
-                  style={{ fontFamily: "var(--font-courier-prime), monospace" }}
-                >
+              <div className="space-y-4">
+                <h4 className="text-2xl text-amber-500 font-serif uppercase">
                   Art Commissions
                 </h4>
-                <p className="text-gray-400 text-sm">
-                  Custom portrait commissions available for:
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Creating heirlooms that tell your story. Custom portraits
+                  tailored to capture genuine emotion.
                 </p>
               </div>
-              <ul className="space-y-4 text-gray-300 font-light border-l border-white/10 pl-6">
-                <li>Individual portraits</li>
-                <li>Family portraits</li>
-                <li>Pet portraits</li>
-                <li>Memorial pieces</li>
-                <li>Corporate commissions</li>
+              <ul className="space-y-4 text-gray-300 font-light border-l border-white/10 pl-6 text-sm uppercase tracking-widest font-mono">
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Individual
+                  Portraits
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Family &
+                  Wedding Collections
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Memorial
+                  Pieces
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Coporate
+                  Commissions
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Pet
+                  Portraits
+                </li>
               </ul>
               <div className="pt-4">
-                <p className="text-xs font-mono text-gray-500 mb-4 uppercase">
-                  Portraits starting from £350
+                <p className="text-xs font-mono text-gray-600 mb-6 uppercase tracking-widest">
+                  Commissions from £350
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-block px-8 py-3 border border-white text-white text-xs uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-300"
+                  className="inline-block px-8 py-4 border border-white/20 text-white text-[10px] font-mono uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500"
                 >
                   Request Quote
                 </Link>

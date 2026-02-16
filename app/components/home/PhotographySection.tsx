@@ -1,5 +1,5 @@
 "use client";
-import { motion, AnimatePresence, useSpring } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
 import Image from "next/image";
 import { useState, useRef, MouseEvent, ReactElement, useEffect } from "react";
 import Link from "next/link";
@@ -18,8 +18,8 @@ const SAMPLE_PHOTOS: Photo[] = [
   { src: "/hand/x5.jpeg", title: "Freedom", year: "2024" },
   { src: "/hand/x6.jpeg", title: "Light", year: "2023" },
   { src: "/hand/x7.jpeg", title: "Lady", year: "2024" },
-  { src: "/hand/x8.jpeg", title: "Hers", year: "2024" },
-  { src: "/hand/x9.jpeg", title: "Red", year: "2024" },
+  { src: "/hand/x9.jpeg", title: "Hers", year: "2024" },
+  { src: "/hand/x8.jpeg", title: "Red", year: "2024" },
 ];
 
 export default function Photography(): ReactElement {
@@ -50,7 +50,7 @@ export default function Photography(): ReactElement {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative bg-black py-16 md:py-24 px-4 md:px-12 overflow-hidden"
+      className="relative bg-black py-16 md:py-32 px-4 md:px-12 overflow-hidden"
     >
       {!isMobile && (
         <motion.div
@@ -59,53 +59,45 @@ export default function Photography(): ReactElement {
         />
       )}
 
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12 md:mb-16">
-        <div className="lg:col-span-5">
-          <motion.h2
+      {/* 1. UPDATED HEADER & NARRATIVE */}
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16 md:mb-24">
+        <div className="lg:col-span-7">
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-7xl font-serif text-white mb-4 uppercase tracking-tighter"
+            viewport={{ once: true }}
           >
-            Aperture <span className="text-amber-500/80">&</span> Soul
-          </motion.h2>
-          <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light max-w-md">
-            Capturing the silence between heartbeats. Every frame is a fragment
-            of an unseen story.
-          </p>
+            <h2 className="text-4xl md:text-7xl font-serif text-white mb-8 uppercase tracking-tighter">
+              Professional <br />
+              <span className="text-amber-500/90">Photography Services</span>
+            </h2>
+            <p className="text-gray-300 text-lg md:text-2xl font-light max-w-2xl leading-relaxed italic border-l border-amber-500/30 pl-6">
+              `&quot;I look for the candid moments—the laughter, the quiet joy,
+              and the genuine connections—to create images that feel as real as
+              the memory itself.&quote;`
+            </p>
+          </motion.div>
         </div>
 
-        <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-6 border-l-0 lg:border-l border-white/10 lg:pl-12">
-          {[
-            { label: "Portraits", price: "$250" },
-            { label: "Cinematic", price: "$400" },
-            { label: "Editorial", price: "$350" },
-            { label: "Events", price: "Custom" },
-          ].map((service, i) => (
-            <div key={i} className="group">
-              <span className="text-[9px] font-mono text-amber-500/50 block mb-1 uppercase tracking-widest">
-                0{i + 1}
-              </span>
-              <h5 className="text-base md:text-lg text-white font-serif italic">
-                {service.label}
-              </h5>
-              <p className="text-[9px] text-gray-600 font-mono mt-1 uppercase">
-                {service.price}
-              </p>
+        <div className="lg:col-span-5 flex flex-col justify-end lg:items-end">
+          <div className="space-y-6">
+            <p className="text-gray-500 text-sm md:text-base leading-relaxed font-light max-w-xs lg:text-right">
+              Whether documenting a milestone or a fleeting moment, I capture
+              the essence of the individual.
+            </p>
+            <div className="flex lg:justify-end">
+              <Link
+                href="/contact?intent=photography"
+                className="inline-block px-10 py-4 border border-amber-500/30 text-amber-500 text-[10px] font-mono uppercase tracking-[0.4em] hover:bg-amber-500 hover:text-black transition-all duration-500"
+              >
+                Book a Session
+              </Link>
             </div>
-          ))}
-
-          <div className="col-span-2 md:col-span-4 mt-2">
-            <Link
-              href="/contact?intent=photography"
-              className="inline-block px-6 py-3 border border-amber-500/30 text-amber-500 text-[10px] font-mono uppercase tracking-[0.4em] hover:bg-amber-500 hover:text-black transition-all"
-            >
-              Book Session
-            </Link>
           </div>
         </div>
       </div>
 
-      {/* 3. THE "FILM-STRIP" REEL - ADJUSTED FOR PORTRAIT IMAGES */}
+      {/* 2. THE FILM STRIP REEL */}
       <div className="relative z-10 h-[50vh] md:h-[65vh] flex gap-1.5 md:gap-2 overflow-hidden px-1 rounded-sm">
         {SAMPLE_PHOTOS.map((photo, i) => {
           const isActive = i === index;
@@ -116,8 +108,7 @@ export default function Photography(): ReactElement {
               onClick={() => setIndex(i)}
               initial={false}
               animate={{
-                // REDUCED WIDTH: from 60% to 35% on desktop to prevent portrait photos from looking landscape
-                width: isActive ? (isMobile ? "75%" : "35%") : "8%",
+                width: isActive ? (isMobile ? "80%" : "35%") : "8.125%",
                 opacity: isActive ? 1 : 0.4,
               }}
               transition={{
@@ -131,24 +122,35 @@ export default function Photography(): ReactElement {
             >
               <Image
                 src={photo.src}
-                alt={photo.title}
+                alt="Photography Portfolio Item"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                // object-cover ensures the image fills the container without stretching
-                className={`object-cover ${isActive ? "" : "brightness-50"}`}
+                className={`object-cover transition-all duration-700 ${isActive ? "scale-105" : "brightness-50 grayscale"}`}
                 priority={i < 3}
               />
 
-              {/* Title and Year removed from here as requested */}
+              {/* Subtle metadata indicator on active frame */}
+              {isActive && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute top-6 right-6 z-20"
+                >
+                  <span className="text-[8px] font-mono text-white/40 border border-white/10 px-2 py-1 uppercase tracking-widest bg-black/20 backdrop-blur-md">
+                    Exposure_0{i + 1}
+                  </span>
+                </motion.div>
+              )}
             </motion.div>
           );
         })}
       </div>
 
-      <div className="relative z-10 mt-6 flex justify-between items-center max-w-7xl mx-auto opacity-30">
+      {/* 3. COMPACT INDEX */}
+      <div className="relative z-10 mt-8 flex justify-between items-center max-w-7xl mx-auto opacity-30">
         <div className="h-[1px] flex-1 bg-white/10 mr-4" />
-        <span className="text-[9px] font-mono text-white tracking-widest">
-          0{index + 1} / 0{SAMPLE_PHOTOS.length}
+        <span className="text-[9px] font-mono text-white tracking-[0.5em] uppercase">
+          Archive_Index 0{index + 1} / 0{SAMPLE_PHOTOS.length}
         </span>
       </div>
     </section>

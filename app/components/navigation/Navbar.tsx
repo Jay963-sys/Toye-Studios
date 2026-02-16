@@ -73,7 +73,7 @@ export default function Navbar() {
                 ),
               )}
             </div>
-            <Clock /> {/* Add the clock here */}
+            <Clock /> 
           </div>
           {/* Mobile Menu Toggle - Custom Hamburger */}
           <button
