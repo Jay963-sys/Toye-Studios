@@ -91,7 +91,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono uppercase tracking-widest text-gray-600">
         <p>© {currentYear} TOYE STUDIOS — ALL RIGHTS RESERVED</p>
 
-        <Link
+        {/*<Link
           href="https://jay-dev-portfolio.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
@@ -101,7 +101,7 @@ export default function Footer() {
           <span className="text-amber-500 group-hover:underline group-hover:underline-offset-4">
             Jay
           </span>
-        </Link>
+        </Link>*/}
       </div>
     </footer>
   );
