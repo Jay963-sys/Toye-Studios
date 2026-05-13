@@ -40,17 +40,6 @@ const CLASSES: ClassType[] = [
     price: "From £399",
   },
   {
-    title: "Cinematic Lighting",
-    category: "Photography",
-    description:
-      "A session dedicated to the photographer's eye. Understand how to manipulate natural and studio light to tell a story in a single frame.",
-    image: "/brand/let.png",
-    duration: "4 weeks",
-    students: "Max 8",
-    skills: ["Lighting", "Mood", "Editing", "Visual Narrative"],
-    price: "From £499",
-  },
-  {
     title: "Professional Atelier",
     category: "Professional",
     description:

@@ -6,18 +6,11 @@ import Link from "next/link";
 
 const ARTIST_IMAGE = "/brand/p.png";
 const PORTFOLIO_IMAGES = [
-  "/hand/t38.png",
-
-  "/hand/t17.jpg",
-  "/hand/t41.jpg",
-  "/hand/t36.jpg",
-  "/hand/t42.jpg",
-  "/hand/t10.jpg",
-  "/hand/t2.jpg",
-  "/brand/b.png",
-  "/brand/a.png",
-  "/brand/d.png",
-  "/brand/21.png",
+  "/changes/m2.jpeg",
+  "/changes/m1.jpeg",
+  "/changes/m4.jpeg",
+  "/changes/m5.jpeg",
+  "/changes/m3.jpeg",
 ];
 
 export default function Showcase(): ReactElement {
@@ -61,8 +54,8 @@ export default function Showcase(): ReactElement {
             </h2>
 
             <p className="text-gray-300 text-xl md:text-2xl font-light max-w-xl leading-relaxed italic border-l-2 border-amber-500/30 pl-6">
-              `&quot;I believe the best images—whether drawn or
-              photographed—come from genuine connection.&quote;`
+              I believe the best images—whether drawn or photographed—come from
+              genuine connections.
             </p>
 
             <p className="text-gray-400 max-w-lg leading-relaxed text-lg">
@@ -90,7 +83,7 @@ export default function Showcase(): ReactElement {
                 Portfolio
               </span>
               <h3 className="text-3xl font-serif uppercase tracking-tighter mt-2 italic">
-                Selected Works
+                Hand Drawn Portraits
               </h3>
             </div>
             <div className="text-right font-mono text-xs text-white/20">
@@ -154,6 +147,57 @@ export default function Showcase(): ReactElement {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
+            {/* Commissions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="space-y-8"
+            >
+              <div className="space-y-4">
+                <h4 className="text-2xl text-amber-500 font-serif uppercase">
+                  Art Commissions
+                </h4>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Creating heirlooms that tell your story. Custom portraits
+                  tailored to capture genuine essence.
+                </p>
+              </div>
+              <ul className="space-y-4 text-gray-300 font-light border-l border-white/10 pl-6 text-sm uppercase tracking-widest font-mono">
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Individual
+                  Portraits
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Family &
+                  Wedding Collections
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Memorial
+                  Pieces
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Coporate
+                  Commissions
+                </li>
+                <li>
+                  <span className="text-amber-500/50 mr-2">—</span> Pet
+                  Portraits
+                </li>
+              </ul>
+              <div className="pt-4">
+                <p className="text-xs font-mono text-gray-600 mb-6 uppercase tracking-widest">
+                  Commissions from £200 (Delivery inclusive)
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-block px-8 py-4 border border-white/20 text-white text-[10px] font-mono uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500"
+                >
+                  Request Quote
+                </Link>
+              </div>
+            </motion.div>
             {/* Art Workshops */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -188,8 +232,8 @@ export default function Showcase(): ReactElement {
                   Events Classes
                 </li>
                 <li>
-                  <span className="text-amber-500/50 mr-2">—</span> Online
-                  Classes
+                  <span className="text-amber-500/50 mr-2">—</span> e-sessions
+                  (beginner, intermediate, masterclass)
                 </li>
               </ul>
               <div className="pt-4">
@@ -200,59 +244,7 @@ export default function Showcase(): ReactElement {
                   href="/contact"
                   className="inline-block px-8 py-4 bg-white text-black text-[10px] font-mono uppercase tracking-[0.3em] hover:bg-amber-500 transition-all duration-500"
                 >
-                  Book Workshop
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Commissions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="space-y-8"
-            >
-              <div className="space-y-4">
-                <h4 className="text-2xl text-amber-500 font-serif uppercase">
-                  Art Commissions
-                </h4>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Creating heirlooms that tell your story. Custom portraits
-                  tailored to capture genuine emotion.
-                </p>
-              </div>
-              <ul className="space-y-4 text-gray-300 font-light border-l border-white/10 pl-6 text-sm uppercase tracking-widest font-mono">
-                <li>
-                  <span className="text-amber-500/50 mr-2">—</span> Individual
-                  Portraits
-                </li>
-                <li>
-                  <span className="text-amber-500/50 mr-2">—</span> Family &
-                  Wedding Collections
-                </li>
-                <li>
-                  <span className="text-amber-500/50 mr-2">—</span> Memorial
-                  Pieces
-                </li>
-                <li>
-                  <span className="text-amber-500/50 mr-2">—</span> Coporate
-                  Commissions
-                </li>
-                <li>
-                  <span className="text-amber-500/50 mr-2">—</span> Pet
-                  Portraits
-                </li>
-              </ul>
-              <div className="pt-4">
-                <p className="text-xs font-mono text-gray-600 mb-6 uppercase tracking-widest">
-                  Commissions from £350
-                </p>
-                <Link
-                  href="/contact"
-                  className="inline-block px-8 py-4 border border-white/20 text-white text-[10px] font-mono uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500"
-                >
-                  Request Quote
+                  Book Class
                 </Link>
               </div>
             </motion.div>

@@ -11,15 +11,11 @@ interface Photo {
 }
 
 const SAMPLE_PHOTOS: Photo[] = [
-  { src: "/hand/x2.jpeg", title: "Golden Hour", year: "2023" },
-  { src: "/hand/x1.jpeg", title: "Mood Light", year: "2023" },
-  { src: "/hand/x4.jpeg", title: "Grateful", year: "2022" },
-  { src: "/hand/x3.jpeg", title: "Studio Portrait", year: "2023" },
-  { src: "/hand/x5.jpeg", title: "Freedom", year: "2024" },
-  { src: "/hand/x6.jpeg", title: "Light", year: "2023" },
-  { src: "/hand/x7.jpeg", title: "Lady", year: "2024" },
-  { src: "/hand/x9.jpeg", title: "Hers", year: "2024" },
-  { src: "/hand/x8.jpeg", title: "Red", year: "2024" },
+  { src: "/changes/p1.jpeg", title: "Golden Hour", year: "2023" },
+  { src: "/changes/p2.jpeg", title: "Mood Light", year: "2023" },
+  { src: "/changes/p3.jpeg", title: "Grateful", year: "2022" },
+  { src: "/changes/p4.jpeg", title: "Studio Portrait", year: "2023" },
+  { src: "/changes/p5.jpeg", title: "Freedom", year: "2024" },
 ];
 
 export default function Photography(): ReactElement {

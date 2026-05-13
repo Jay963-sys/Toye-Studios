@@ -15,77 +15,64 @@ type Artwork = {
 const ARTWORKS: Artwork[] = [
   {
     title: "#30 Sketch",
-    image: "/hand/t41.jpg",
+    image: "/changes/m6.jpeg",
     medium: "Pencil",
     year: "2023",
     description: "Emotional depth captured in graphite.",
   },
   {
     title: "#31 Sketch",
-    image: "/hand/t42.jpg",
+    image: "/changes/m7.jpeg",
     medium: "Pencil",
     year: "2023",
     description: "Study of human form and shadow.",
   },
   {
     title: "Ethereal Portrait",
-    image: "/brand/c.png",
+    image: "/changes/m8.jpeg",
     medium: "Pencil",
     year: "2023",
     description: "Delicate exploration of light.",
   },
   {
     title: "Mood Light",
-    image: "/brand/d.png",
+    image: "/changes/m1.jpeg",
     medium: "Pencil",
     year: "2023",
     description: "The intersection of light and emotion.",
   },
   {
     title: "#47 Sketch",
-    image: "/hand/t2.jpg",
+    image: "/changes/m2.jpeg",
     medium: "Pencil",
     year: "2023",
     description: "Raw charcoal study.",
   },
   {
     title: "#40 Sketch",
-    image: "/hand/t10.jpg",
+    image: "/changes/m3.jpeg",
     medium: "Pencil",
     year: "2023",
     description: "Hyperrealistic tonal study.",
   },
   {
     title: "#99 Sketch",
-    image: "/hand/t38.png",
+    image: "/changes/m4.jpeg",
     medium: "Pencil",
     year: "2023",
     description: "Hyperrealistic tonal study.",
   },
   {
     title: "#75 Sketch",
-    image: "/brand/a.png",
-    medium: "Pencil",
-    year: "2023",
-    description: "Hyperrealistic tonal study.",
-  },
-  {
-    title: "#78 Sketch",
-    image: "/brand/b.png",
+    image: "/changes/m5.jpeg",
     medium: "Pencil",
     year: "2023",
     description: "Hyperrealistic tonal study.",
   },
 ];
 
-const MEDIUMS = ["All", "Pencil", "Ink", "Digital", "Charcoal", "Watercolor"];
-
 export default function ArtworksPage(): ReactElement {
-  const [filter, setFilter] = useState("All");
   const [selectedArt, setSelectedArt] = useState<Artwork | null>(null);
-
-  const filteredArtworks =
-    filter === "All" ? ARTWORKS : ARTWORKS.filter((a) => a.medium === filter);
 
   return (
     <section className="relative w-full min-h-screen bg-black text-white py-32 px-4 md:px-12 overflow-hidden">
@@ -103,60 +90,30 @@ export default function ArtworksPage(): ReactElement {
           transition={{ duration: 1 }}
         >
           <span className="text-[10px] uppercase tracking-[0.8em] text-amber-500/60 block mb-6">
-            Permanent Collection
+            Past Commissions
           </span>
           <h1 className="text-6xl md:text-9xl font-serif italic leading-none tracking-tighter mb-8 uppercase">
             The <span className="text-amber-500">Archive</span>
           </h1>
           <p className="text-gray-500 text-lg md:text-xl font-light max-w-2xl leading-relaxed">
-            A decade of hyperrealistic exploration. Every stroke is a dialogue
-            between the physical medium and the human spirit.
+            A decade of Pencil Hyperrealistic exploration.
           </p>
         </motion.div>
 
         {/* STATS BAR */}
         <div className="flex gap-12 mt-16 border-t border-white/10 pt-8 text-[10px] font-mono uppercase tracking-widest text-gray-600">
           <div>{ARTWORKS.length} Works</div>
-          <div>{MEDIUMS.length - 1} Mediums</div>
-          <div>{new Set(ARTWORKS.map((a) => a.year)).size} Years</div>
+          <div>1 Medium</div>
         </div>
       </div>
 
-      {/* 3. ATELIER FILTER SYSTEM */}
-      <div className="relative z-10 max-w-6xl mx-auto mb-20">
-        <div className="flex flex-wrap gap-x-8 gap-y-6 items-center">
-          <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">
-            Filter by Medium:
-          </span>
-          {MEDIUMS.map((m) => (
-            <button
-              key={m}
-              onClick={() => setFilter(m)}
-              className={`text-xs uppercase tracking-[0.2em] transition-all duration-300 relative ${
-                filter === m
-                  ? "text-amber-500 italic font-bold"
-                  : "text-white/40 hover:text-white"
-              }`}
-            >
-              {m}
-              {filter === m && (
-                <motion.div
-                  layoutId="filterDot"
-                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-amber-500 rounded-full"
-                />
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* 4. THE STAGGERED MASONRY GRID (TITLES REMOVED) */}
+      {/* 3. THE STAGGERED MASONRY GRID */}
       <motion.div
         layout
         className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16"
       >
         <AnimatePresence mode="popLayout">
-          {filteredArtworks.map((art, i) => (
+          {ARTWORKS.map((art, i) => (
             <motion.div
               key={art.title}
               layout
@@ -183,7 +140,7 @@ export default function ArtworksPage(): ReactElement {
                 {/* Physical Border Detail */}
                 <div className="absolute inset-0 border border-white/5 group-hover:border-amber-500/20 transition-colors pointer-events-none" />
 
-                {/* Hover Info Badge (Replacing static title) */}
+                {/* Hover Info Badge */}
                 <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <p className="text-[10px] font-mono text-amber-500 uppercase tracking-[0.3em]">
                     {art.medium} {art.year}
@@ -200,7 +157,7 @@ export default function ArtworksPage(): ReactElement {
         </AnimatePresence>
       </motion.div>
 
-      {/* 5. THE ZEN DETAIL MODAL (TITLE REMOVED) */}
+      {/* 4. THE ZEN DETAIL MODAL */}
       <AnimatePresence>
         {selectedArt && (
           <motion.div

@@ -9,120 +9,55 @@ import { useState, ReactElement } from "react";
 type Photo = {
   title: string;
   year: string;
-  category: string;
   src: string;
   description: string;
-  location: string;
 };
 
 const PHOTOS: Photo[] = [
   {
     title: "Mood Light",
     year: "2023",
-    category: "Portraits",
-    src: "/hand/x2.jpeg",
+    src: "/changes/p5.jpeg",
     description: "Dramatic lighting and shadow play.",
-    location: "Studio",
   },
   {
     title: "Happy Hour",
     year: "2023",
-    category: "Outdoor",
-    src: "/hand/x1.jpeg",
+    src: "/changes/p4.jpeg",
     description: "Perfect moment at sunset.",
-    location: "Coastal",
   },
   {
     title: "Urban Shadows",
     year: "2022",
-    category: "Events",
-    src: "/hand/x6.jpeg",
+    src: "/changes/p3.jpeg",
     description: "Event documentation as art.",
-    location: "Downtown",
   },
   {
     title: "Golden Hour",
     year: "2023",
-    category: "Outdoor",
-    src: "/hand/x3.jpeg",
+    src: "/changes/p2.jpeg",
     description: "Nature's perfect lighting.",
-    location: "Coastal",
   },
   {
     title: "Living Colors",
     year: "2021",
-    category: "Outdoor",
-    src: "/hand/x4.jpeg",
+    src: "/changes/p1.jpeg",
     description: "Moment captured at a waterfront.",
-    location: "Coastal",
-  },
-  {
-    title: "Studio Portrait",
-    year: "2023",
-    category: "Portraits",
-    src: "/hand/x5.jpeg",
-    description: "Classic portraiture, contemporary edge.",
-    location: "Studio",
-  },
-  {
-    title: "Peace",
-    year: "2025",
-    category: "Portraits",
-    src: "/hand/x7.jpeg",
-    description: "Raw emotion and authentic connection.",
-    location: "Outdoor",
-  },
-  {
-    title: "Stillness",
-    year: "2025",
-    category: "Portraits",
-    src: "/hand/x8.jpeg",
-    description: "Authentic human connection.",
-    location: "Outdoor",
-  },
-  {
-    title: "City Lights",
-    year: "2025",
-    category: "Portraits",
-    src: "/hand/x9.jpeg",
-    description: "Raw emotion in urban space.",
-    location: "Outdoor",
-  },
-  {
-    title: "City Lights",
-    year: "2025",
-    category: "Portraits",
-    src: "/hand/x11.jpeg",
-    description: "Raw emotion in urban space.",
-    location: "Outdoor",
-  },
-  {
-    title: "City Lights",
-    year: "2025",
-    category: "Portraits",
-    src: "/hand/x12.jpeg",
-    description: "Raw emotion in urban space.",
-    location: "Outdoor",
-  },
-  {
-    title: "City Lights",
-    year: "2025",
-    category: "Portraits",
-    src: "/hand/x13.jpeg",
-    description: "Raw emotion in urban space.",
-    location: "Outdoor",
   },
 ];
 
-const CATEGORIES = ["All", "Portraits", "Events", "Outdoor"];
+const CATEGORIES = ["All"];
 
 export default function PhotographyPage(): ReactElement {
   const [filter, setFilter] = useState("All");
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
 
   const filteredPhotos =
-    filter === "All" ? PHOTOS : PHOTOS.filter((p) => p.category === filter);
-
+    filter === "All"
+      ? PHOTOS
+      : PHOTOS.filter((photo) =>
+          photo.description.includes(filter.slice(0, -1)),
+        );
   return (
     <section className="relative w-full min-h-screen bg-black text-white py-32 px-4 md:px-12 overflow-hidden">
       {/* 1. CINEMATIC BACKGROUND AMBIANCE */}
@@ -142,7 +77,7 @@ export default function PhotographyPage(): ReactElement {
             Lens & Perspective
           </span>
           <h1 className="text-6xl md:text-9xl font-serif italic leading-none tracking-tighter mb-8 uppercase">
-            The <span className="text-blue-500">Contact</span> Sheet
+            Candid <span className="text-blue-500">Portrait</span> Catalogue
           </h1>
           <p className="text-gray-500 text-lg md:text-xl font-light max-w-2xl leading-relaxed">
             Observing the world through light and storytelling. Every frame is
@@ -154,7 +89,6 @@ export default function PhotographyPage(): ReactElement {
         <div className="flex gap-12 mt-16 border-t border-white/5 pt-8 text-[10px] font-mono uppercase tracking-[0.5em] text-white/20">
           <div>{PHOTOS.length} Exposures</div>
           <div>{CATEGORIES.length - 1} Categories</div>
-          <div>Available Worldwide</div>
         </div>
       </div>
 
@@ -217,13 +151,6 @@ export default function PhotographyPage(): ReactElement {
                     {photo.year} {i}
                   </span>
                 </div>
-
-                {/* Subtle Category Hover Overlay */}
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <p className="text-[9px] font-mono text-blue-400 uppercase tracking-widest">
-                    {photo.category}
-                  </p>
-                </div>
               </div>
 
               {/* Minimalist Line & View Trigger (Replacing Title/Location) */}
@@ -277,10 +204,6 @@ export default function PhotographyPage(): ReactElement {
                   <div className="text-right">
                     <p className="text-[10px] font-mono text-blue-500 uppercase tracking-[0.4em] mb-1">
                       Exposure Data
-                    </p>
-                    <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.4em]">
-                      {selectedPhoto.year} / {selectedPhoto.category} /
-                      ARCHIVE_REF
                     </p>
                   </div>
                   <button

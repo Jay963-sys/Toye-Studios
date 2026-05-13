@@ -13,14 +13,14 @@ const CONTACT_METHODS = [
     label: "Direct Correspondence",
   },
   {
-    title: "Studio Line",
+    title: "Whatsapp",
     value: "+44 7823541627",
-    link: "tel:+44 7823541627",
-    label: "Mon—Fri, 9am—6pm",
+    link: "https://wa.me/447823541627",
+    label: "Mon—Sat, 9am—6pm",
   },
   {
     title: "Location",
-    value: "London // UK",
+    value: "Basingstoke & London // UK",
     link: "#",
     label: "Global Commissions",
   },
@@ -155,9 +155,9 @@ export default function ContactPage(): ReactElement {
                 Process Note
               </p>
               <p className="text-sm text-gray-500 leading-relaxed font-light italic">
-                &quot;Every project begins with a conversation. Please allow
-                24-48 hours for a studio response regarding bespoke commissions
-                and schedule availability.&quot;
+                &quot;Every project begins with a conversation. Please allow 1
+                hour for a studio response regarding bespoke commissions and
+                schedule availability.&quot;
               </p>
             </div>
           </div>
