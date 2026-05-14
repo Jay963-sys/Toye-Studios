@@ -99,7 +99,8 @@ export default function Showcase(): ReactElement {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
-            <div className="relative w-full lg:w-2/3 aspect-[16/10] bg-white/5 rounded-sm overflow-hidden shadow-2xl border border-white/5 flex items-center justify-center">
+            <div className="relative w-full lg:w-2/3 h-[60vh] md:h-[70vh] lg:h-[80vh] bg-white/5 rounded-sm overflow-hidden shadow-2xl border border-white/5 flex items-center justify-center">
+              {" "}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeWork}
