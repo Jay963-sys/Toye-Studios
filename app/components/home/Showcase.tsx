@@ -5,12 +5,19 @@ import { useState, ReactElement } from "react";
 import Link from "next/link";
 
 const ARTIST_IMAGE = "/brand/p.png";
-const PORTFOLIO_IMAGES = [
-  "/changes/m2.jpeg",
-  "/changes/m1.jpeg",
-  "/changes/m4.jpeg",
-  "/changes/m5.jpeg",
-  "/changes/m3.jpeg",
+
+type MediaItem = {
+  type: "image" | "video";
+  src: string;
+};
+
+const PORTFOLIO_MEDIA: MediaItem[] = [
+  { type: "video", src: "/changes/v1.mp4" },
+  { type: "image", src: "/changes/m2.jpeg" },
+  { type: "image", src: "/changes/m1.jpeg" },
+  { type: "image", src: "/changes/m4.jpeg" },
+  { type: "image", src: "/changes/m5.jpeg" },
+  { type: "image", src: "/changes/m3.jpeg" },
 ];
 
 export default function Showcase(): ReactElement {
@@ -87,12 +94,12 @@ export default function Showcase(): ReactElement {
               </h3>
             </div>
             <div className="text-right font-mono text-xs text-white/20">
-              {activeWork + 1} / {PORTFOLIO_IMAGES.length}
+              {activeWork + 1} / {PORTFOLIO_MEDIA.length}
             </div>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
-            <div className="relative w-full lg:w-2/3 aspect-[16/10] bg-white/5 rounded-sm overflow-hidden shadow-2xl border border-white/5">
+            <div className="relative w-full lg:w-2/3 aspect-[16/10] bg-white/5 rounded-sm overflow-hidden shadow-2xl border border-white/5 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeWork}
@@ -102,18 +109,29 @@ export default function Showcase(): ReactElement {
                   transition={{ duration: 0.5 }}
                   className="relative w-full h-full"
                 >
-                  <Image
-                    src={PORTFOLIO_IMAGES[activeWork]}
-                    alt="Portfolio Item"
-                    fill
-                    className="object-cover"
-                  />
+                  {PORTFOLIO_MEDIA[activeWork].type === "image" ? (
+                    <Image
+                      src={PORTFOLIO_MEDIA[activeWork].src}
+                      alt="Portfolio Item"
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <video
+                      src={PORTFOLIO_MEDIA[activeWork].src}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
 
             <div className="w-full lg:w-1/3 flex lg:flex-col gap-4 overflow-x-auto lg:overflow-y-auto lg:max-h-[60vh] scrollbar-hide">
-              {PORTFOLIO_IMAGES.map((src, i) => (
+              {PORTFOLIO_MEDIA.map((media, i) => (
                 <button
                   key={i}
                   onMouseEnter={() => setActiveWork(i)}
@@ -123,12 +141,33 @@ export default function Showcase(): ReactElement {
                       : "border-white/10 opacity-40 hover:opacity-70"
                   }`}
                 >
-                  <Image
-                    src={src}
-                    alt={`Thumbnail ${i}`}
-                    fill
-                    className="object-cover"
-                  />
+                  {media.type === "image" ? (
+                    <Image
+                      src={media.src}
+                      alt={`Thumbnail ${i}`}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <>
+                      <video
+                        src={media.src}
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover pointer-events-none"
+                      />
+                      {/* Video Indicator Icon */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                        <svg
+                          className="w-6 h-6 text-white/80"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </>
+                  )}
                 </button>
               ))}
             </div>

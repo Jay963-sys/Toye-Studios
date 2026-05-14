@@ -9,7 +9,6 @@ const PORTRAIT_IMAGES = [
   "/brand/a.png",
   "/brand/d.png",
   "/brand/pop.png",
-  // add as many best works as you want
 ];
 
 export default function PortraitArtistSection() {
