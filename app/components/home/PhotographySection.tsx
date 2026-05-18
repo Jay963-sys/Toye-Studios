@@ -68,9 +68,9 @@ export default function Photography(): ReactElement {
               <span className="text-amber-500/90">Photography Services</span>
             </h2>
             <p className="text-gray-300 text-lg md:text-2xl font-light max-w-2xl leading-relaxed italic border-l border-amber-500/30 pl-6">
-              `&quot;I look for the candid moments—the laughter, the quiet joy,
-              and the genuine connections—to create images that feel as real as
-              the memory itself.&quote;`
+              I look for the candid moments—the laughter, the quiet joy, and the
+              genuine connections—to create images that feel as real as the
+              memory itself.
             </p>
           </motion.div>
         </div>
