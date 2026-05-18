@@ -5,41 +5,6 @@ import Image from "next/image";
 import { ReactElement } from "react";
 import Link from "next/link";
 
-const STATS = [
-  { val: "10+", label: "Years Experience" },
-  { val: "500+", label: "Students Taught" },
-  { val: "50+", label: "Exhibitions" },
-  { val: "100+", label: "Works Created" },
-];
-
-const TIMELINE = [
-  {
-    year: "2014",
-    event: "The Genesis",
-    desc: "Began the exploration of visual arts and photography.",
-  },
-  {
-    year: "2018",
-    event: "First Exhibition",
-    desc: "Debuted 'Silent Dialogue' at a curated local gallery.",
-  },
-  {
-    year: "2020",
-    event: "Curatorial Mastery",
-    desc: "Completed advanced studies in Curating to deepen artistic context.",
-  },
-  {
-    year: "2022",
-    event: "Talk Canvas",
-    desc: "Appointed Creative Director at Talk Canvas Gallery.",
-  },
-  {
-    year: "2024",
-    event: "The Atelier",
-    desc: "Launched a global teaching program for hyperrealistic techniques.",
-  },
-];
-
 const BEHIND_SCENES = [
   { src: "/hand/t1.jpg", caption: "Community Energy" },
   { src: "/brand/get.png", caption: "The Workspace" },
@@ -93,64 +58,42 @@ export default function AboutPage(): ReactElement {
             </motion.div>
 
             <div className="space-y-8">
+              {/* Hook text using the first sentence */}
               <p className="text-2xl md:text-3xl font-light leading-relaxed text-gray-300 italic font-serif">
-                &quot;Art is not just about creation; it&apos;s about
-                connection. Every piece is a testament to the quiet dialogue
-                between artist and observer.&quot;
-              </p>
-              <div className="h-px w-20 bg-amber-500/40" />
-              <p className="text-gray-500 text-lg font-light leading-relaxed">
-                With a decade spent mastering the intricate dance of light and
-                shadow, my journey has evolved from simple curiosity to a
-                professional practice in hyperrealistic portraiture,
-                photography, and curatorial direction.
+                Olatoye Salawudeen is a multi-award-winning portrait artist,
+                photographer, and art tutor based in Basingstoke.
               </p>
 
-              {/* STATS STRIP */}
-              <div className="grid grid-cols-2 gap-8 pt-8">
-                {STATS.map((s, i) => (
-                  <div key={i}>
-                    <p className="text-3xl font-bold text-white">{s.val}</p>
-                    <p className="text-[10px] font-mono uppercase tracking-widest text-amber-500/50">
-                      {s.label}
-                    </p>
-                  </div>
-                ))}
+              <div className="h-px w-20 bg-amber-500/40" />
+
+              {/* Main biography text */}
+              <div className="space-y-6 text-gray-400 text-lg font-light leading-relaxed">
+                <p>
+                  Originally from Nigeria, where his work has earned numerous
+                  accolades in exhibitions and online competitions, his true
+                  passion lies in emotional realism. Olatoye specializes in
+                  capturing the depth, nuance, and silent narratives of human
+                  faces through hyper-realistic pencil and charcoal drawings.
+                </p>
+                <p>
+                  Armed with an MA in Curating and a unique academic background
+                  in Microbiology and Public Health, Olatoye brings a deeply
+                  observant, analytical eye to his practice. He is dedicated to
+                  creating timeless legacy commissions and fostering community
+                  creativity through his interactive workshops, Sip & Paint
+                  events, and one-on-one art tutoring. As the Co-Founder and
+                  Creative Director of Talk Canvas Prints, a commercial gallery
+                  in Lagos, Nigeria, he actively curates and mounts ongoing
+                  exhibitions, continually connecting compelling visual
+                  storytelling with a broader audience.
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 3. ARCHIVAL TIMELINE */}
+        {/* 3. BEHIND THE SCENES: STUDIO WALL */}
         <div className="mb-40 pt-20 border-t border-white/5">
-          <span className="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em] block mb-20">
-            The Evolution_Timeline
-          </span>
-          <div className="space-y-24">
-            {TIMELINE.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline group"
-              >
-                <div className="md:col-span-2 text-4xl font-serif italic text-amber-500/40 group-hover:text-amber-500 transition-colors">
-                  {item.year}
-                </div>
-                <div className="md:col-span-4 text-2xl uppercase tracking-tighter font-light">
-                  {item.event}
-                </div>
-                <div className="md:col-span-6 text-gray-500 font-light text-lg">
-                  {item.desc}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* 4. BEHIND THE SCENES: STUDIO WALL */}
-        <div className="mb-40">
           <div className="flex justify-between items-end mb-16">
             <h2 className="text-4xl md:text-6xl font-serif italic">
               Studio <span className="text-amber-500">&</span> Soul
@@ -183,7 +126,7 @@ export default function AboutPage(): ReactElement {
           </div>
         </div>
 
-        {/* 5. CTA: FINAL INVITATION */}
+        {/* 4. CTA: FINAL INVITATION */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
