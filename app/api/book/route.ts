@@ -128,7 +128,6 @@ function escapeHtml(s: string) {
 }
 
 export async function POST(req: Request) {
-  console.log("CURRENT EMAIL_TO:", process.env.EMAIL_TO);
   try {
     const body = (await req.json()) as ReqBody;
 
