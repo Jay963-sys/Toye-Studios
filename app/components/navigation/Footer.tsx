@@ -32,7 +32,7 @@ export default function Footer() {
             art, photography, and curated creative experiences.
           </p>
           <div className="flex gap-4 pt-2">
-            <SocialIcon href="https://www.instagram.com/toye.studios/">
+            <SocialIcon href="https://www.instagram.com/olatoye_salawudeen?igsh=bHR2MXJ0YXRrdTEy">
               <FaInstagram />
             </SocialIcon>
             <SocialIcon href="https://www.facebook.com/toye.pencils">
