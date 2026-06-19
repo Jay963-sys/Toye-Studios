@@ -2,6 +2,7 @@
 
 import React, { useState, ReactElement } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation"; // Added Next.js App Router navigation hook
 
 type Props = {
   initialService?: string;
@@ -16,6 +17,8 @@ export default function BookingForm({
   className = "",
   id = "booking-form",
 }: Props): ReactElement {
+  const router = useRouter(); // Initialize the router
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -60,19 +63,14 @@ export default function BookingForm({
         throw new Error("Failed to send transmission");
       }
 
-      setStatus({
-        type: "success",
-        msg: "Inquiry received. The studio will contact you shortly.",
-      });
-      setForm({ name: "", email: "", service: "", message: "" });
-      setTimeout(() => setStatus(null), 5000);
+      // Automatically redirect to the hidden thank you page to trigger the Meta Pixel
+      router.push("/thank-you");
     } catch (error) {
       setStatus({
         type: "error",
         msg: "Transmission failed. Please try again.",
       });
-    } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Only stop loading if there's an error (redirect handles success state)
     }
   }
 
