@@ -92,9 +92,12 @@ export default function ContactPage(): ReactElement {
               <p className="text-[10px] font-mono text-amber-500/50 uppercase tracking-widest">
                 {method.title}
               </p>
-              <h3 className="text-2xl font-light group-hover:text-amber-500 transition-colors">
+
+              {/* Grid */}
+              <h3 className="text-xl md:text-2xl font-light group-hover:text-amber-500 transition-colors break-all">
                 {method.value}
               </h3>
+
               <p className="text-xs text-gray-600 uppercase tracking-widest">
                 {method.label}
               </p>

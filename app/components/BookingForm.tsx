@@ -48,8 +48,18 @@ export default function BookingForm({
     setIsSubmitting(true);
 
     try {
-      // Logic for submission (API call)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch("/api/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send transmission");
+      }
+
       setStatus({
         type: "success",
         msg: "Inquiry received. The studio will contact you shortly.",
