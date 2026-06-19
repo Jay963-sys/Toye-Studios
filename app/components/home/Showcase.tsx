@@ -17,7 +17,8 @@ const PORTFOLIO_MEDIA: MediaItem[] = [
   { type: "image", src: "/changes/m1.jpeg" },
   { type: "image", src: "/changes/m4.jpeg" },
   { type: "image", src: "/changes/m5.jpeg" },
-  { type: "image", src: "/changes/m3.jpeg" },
+  { type: "image", src: "/changes/10.jpeg" },
+  { type: "image", src: "/changes/9.jpeg" },
 ];
 
 export default function Showcase(): ReactElement {
