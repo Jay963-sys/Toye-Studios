@@ -29,7 +29,7 @@ const CONTACT_METHODS = [
 const SOCIALS = [
   {
     icon: <FaInstagram />,
-    href: "https://www.instagram.com/toye.studios/",
+    href: "https://www.instagram.com/olatoye_salawudeen?igsh=bHR2MXJ0YXRrdTEy",
     name: "IG",
   },
   {
