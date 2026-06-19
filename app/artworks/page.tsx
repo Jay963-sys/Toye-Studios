@@ -63,6 +63,20 @@ const ARTWORKS: Artwork[] = [
     description: "Hyperrealistic tonal study.",
   },
   {
+    title: "#990 Sketch",
+    image: "/changes/9.jpeg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Hyperrealistic tonal study.",
+  },
+  {
+    title: "#991 Sketch",
+    image: "/changes/10.jpeg",
+    medium: "Pencil",
+    year: "2023",
+    description: "Hyperrealistic tonal study.",
+  },
+  {
     title: "#75 Sketch",
     image: "/changes/m5.jpeg",
     medium: "Pencil",
