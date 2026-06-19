@@ -117,7 +117,7 @@ export default function ContactPage(): ReactElement {
             </div>
             <BookingForm
               services={[
-                "Individual Commission",
+                "Art Portrait Commission",
                 "Corporate Art Project",
                 "Workshop Enrollment",
                 "Photography Session",
