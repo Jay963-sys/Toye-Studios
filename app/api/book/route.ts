@@ -35,7 +35,7 @@ function userEmailHtml({
       <div style="max-width:700px;margin:0 auto;border-radius:12px;overflow:hidden;border:1px solid #e6e6e6;">
       <div style="padding: 20px; text-align: center; background-color: #000;">
           <img 
-            src="https://toyestudios.co.uk/brand/pp.svg" 
+            src="https://toyestudios.co.uk/brand/pp.png" 
             alt="Toye Studios Logo" 
             style="width: 150px; height: auto; display: block; margin: 0 auto;" 
           />
@@ -128,7 +128,7 @@ function escapeHtml(s: string) {
 }
 
 export async function POST(req: Request) {
-  console.log("CURRENT EMAIL_TO:", process.env.EMAIL_TO); // Check your terminal!
+  console.log("CURRENT EMAIL_TO:", process.env.EMAIL_TO);
   try {
     const body = (await req.json()) as ReqBody;
 
