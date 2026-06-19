@@ -65,7 +65,7 @@ export default function Photography(): ReactElement {
           >
             <h2 className="text-4xl md:text-7xl font-serif text-white mb-8 uppercase tracking-tighter">
               Professional <br />
-              <span className="text-amber-500/90">Photography Services</span>
+              <span className="text-amber-500/90">Portrait Services</span>
             </h2>
             <p className="text-gray-300 text-lg md:text-2xl font-light max-w-2xl leading-relaxed italic border-l border-amber-500/30 pl-6">
               I look for the candid moments—the laughter, the quiet joy, and the
