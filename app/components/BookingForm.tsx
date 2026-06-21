@@ -2,7 +2,7 @@
 
 import React, { useState, ReactElement } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation"; // Added Next.js App Router navigation hook
+import { useRouter } from "next/navigation";
 
 type Props = {
   initialService?: string;
@@ -17,7 +17,7 @@ export default function BookingForm({
   className = "",
   id = "booking-form",
 }: Props): ReactElement {
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
 
   const [form, setForm] = useState({
     name: "",
@@ -70,7 +70,7 @@ export default function BookingForm({
         type: "error",
         msg: "Transmission failed. Please try again.",
       });
-      setIsSubmitting(false); // Only stop loading if there's an error (redirect handles success state)
+      setIsSubmitting(false);
     }
   }
 
@@ -110,7 +110,7 @@ export default function BookingForm({
               placeholder="e.g. John Doe"
               value={form.name}
               onChange={handleChange}
-              className="w-full bg-transparent border-b border-white/10 py-2 focus:border-amber-500 outline-none transition-colors placeholder:text-white/5 font-light"
+              className="w-full bg-transparent border-b border-white/10 py-2 focus:border-amber-500 outline-none transition-colors placeholder:text-white/40 font-light"
             />
           </div>
 
@@ -125,7 +125,7 @@ export default function BookingForm({
               placeholder="email@example.com"
               value={form.email}
               onChange={handleChange}
-              className="w-full bg-transparent border-b border-white/10 py-2 focus:border-amber-500 outline-none transition-colors placeholder:text-white/5 font-light"
+              className="w-full bg-transparent border-b border-white/10 py-2 focus:border-amber-500 outline-none transition-colors placeholder:text-white/40 font-light"
             />
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function BookingForm({
             onChange={handleChange}
             className="w-full bg-transparent border-b border-white/10 py-2 focus:border-amber-500 outline-none transition-colors appearance-none cursor-pointer font-light"
           >
-            <option value="" className="bg-black">
+            <option value="" className="bg-black text-white/40">
               Select an offering...
             </option>
             {services.map((s) => (
@@ -166,7 +166,7 @@ export default function BookingForm({
             placeholder="Share your vision..."
             value={form.message}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-white/10 py-2 focus:border-amber-500 outline-none transition-colors resize-none placeholder:text-white/5 font-light"
+            className="w-full bg-transparent border-b border-white/10 py-2 focus:border-amber-500 outline-none transition-colors resize-none placeholder:text-white/40 font-light"
           />
         </div>
 

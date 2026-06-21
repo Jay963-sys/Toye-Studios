@@ -56,7 +56,7 @@ export default function ContactPage(): ReactElement {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* 2. HEADER: MINIMAL & BOLD */}
-        <div className="mb-24">
+        <div className="mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,35 +78,8 @@ export default function ContactPage(): ReactElement {
           </motion.div>
         </div>
 
-        {/* 3. CONTACT DIRECTORY: CLEAN LIST LAYOUT */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-32 border-y border-white/5 py-16">
-          {CONTACT_METHODS.map((method, i) => (
-            <motion.a
-              key={i}
-              href={method.link}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: i * 0.1 }}
-              className="group space-y-4"
-            >
-              <p className="text-[10px] font-mono text-amber-500/50 uppercase tracking-widest">
-                {method.title}
-              </p>
-
-              {/* Grid */}
-              <h3 className="text-xl md:text-2xl font-light group-hover:text-amber-500 transition-colors break-all">
-                {method.value}
-              </h3>
-
-              <p className="text-xs text-gray-600 uppercase tracking-widest">
-                {method.label}
-              </p>
-            </motion.a>
-          ))}
-        </div>
-
-        {/* 4. FORM & SOCIALS: SPLIT SCREEN */}
-        <div className="grid lg:grid-cols-12 gap-20 items-start">
+        {/* 3. FORM & CONTEXT: MOVED UP FOR BETTER CONVERSIONS */}
+        <div className="grid lg:grid-cols-12 gap-20 items-start mb-24">
           {/* LEFT: FORM (8 Cols) */}
           <div className="lg:col-span-8">
             <div className="mb-12">
@@ -127,31 +100,7 @@ export default function ContactPage(): ReactElement {
           </div>
 
           {/* RIGHT: CONNECT & CONTEXT (4 Cols) */}
-          <div className="lg:col-span-4 space-y-16">
-            {/* Social Grid */}
-            <div className="space-y-8">
-              <h4 className="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em]">
-                Digital Presence
-              </h4>
-              <div className="grid grid-cols-2 gap-4">
-                {SOCIALS.map((social, i) => (
-                  <a
-                    key={i}
-                    href={social.href}
-                    target="_blank"
-                    className="flex items-center justify-between p-4 border border-white/5 hover:border-amber-500/40 hover:bg-white/[0.02] transition-all group"
-                  >
-                    <span className="text-xl text-gray-500 group-hover:text-amber-500">
-                      {social.icon}
-                    </span>
-                    <span className="text-[10px] font-mono text-gray-600 group-hover:text-white uppercase tracking-widest">
-                      {social.name}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
-
+          <div className="lg:col-span-4 pt-4">
             {/* Studio Note */}
             <div className="p-8 border-l border-amber-500/20 bg-white/[0.01] space-y-4">
               <p className="text-[10px] font-mono text-amber-500/50 uppercase tracking-widest">
@@ -162,6 +111,56 @@ export default function ContactPage(): ReactElement {
                 hour for a studio response regarding bespoke commissions and
                 schedule availability.&quot;
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. CONTACT DIRECTORY & SOCIALS: MOVED TO BOTTOM */}
+        <div className="border-t border-white/10 pt-16 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            {CONTACT_METHODS.map((method, i) => (
+              <motion.a
+                key={i}
+                href={method.link}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: i * 0.1 }}
+                className="group space-y-4 block"
+              >
+                <p className="text-[10px] font-mono text-amber-500/50 uppercase tracking-widest">
+                  {method.title}
+                </p>
+                <h3 className="text-xl md:text-2xl font-light group-hover:text-amber-500 transition-colors break-all">
+                  {method.value}
+                </h3>
+                <p className="text-xs text-gray-600 uppercase tracking-widest">
+                  {method.label}
+                </p>
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Social Grid Moved to Bottom */}
+          <div className="space-y-6">
+            <h4 className="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em]">
+              Digital Presence
+            </h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {SOCIALS.map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  className="flex items-center justify-between p-4 border border-white/5 hover:border-amber-500/40 hover:bg-white/[0.02] transition-all group"
+                >
+                  <span className="text-xl text-gray-500 group-hover:text-amber-500">
+                    {social.icon}
+                  </span>
+                  <span className="text-[10px] font-mono text-gray-600 group-hover:text-white uppercase tracking-widest">
+                    {social.name}
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
         </div>
