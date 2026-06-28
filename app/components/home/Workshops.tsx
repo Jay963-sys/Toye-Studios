@@ -62,34 +62,8 @@ export default function Workshops() {
     message: "",
   });
   const [selectedWorkshop, setSelectedWorkshop] = useState<Workshop | null>(
-    null
+    null,
   );
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.MouseEvent) => {
-    e.preventDefault();
-
-    if (!form.name || !form.email || !form.service) {
-      alert("Please fill out all required fields");
-      return;
-    }
-
-    setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setForm({ name: "", email: "", service: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
-  };
 
   const scrollToForm = (workshopTitle?: string) => {
     if (workshopTitle) {
@@ -316,16 +290,7 @@ export default function Workshops() {
       </AnimatePresence>
 
       {/* Booking Form Section */}
-      <BookingForm
-        initialService={selectedWorkshop?.title ?? ""}
-        services={[
-          "Drawing Basics",
-          "Creative Workshop",
-          "Photography Session",
-          "Brand Collaboration",
-          "Portrait Commission",
-        ]}
-      />
+      <BookingForm />
     </section>
   );
 }
