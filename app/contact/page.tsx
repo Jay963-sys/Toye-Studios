@@ -88,15 +88,7 @@ export default function ContactPage(): ReactElement {
               </h2>
               <div className="h-px w-12 bg-amber-500/40 mt-4" />
             </div>
-            <BookingForm
-              services={[
-                "Art Portrait Commission",
-                "Corporate Art Project",
-                "Workshop Enrollment",
-                "Photography Session",
-                "General Collaboration",
-              ]}
-            />
+            <BookingForm />
           </div>
 
           {/* RIGHT: CONNECT & CONTEXT (4 Cols) */}
