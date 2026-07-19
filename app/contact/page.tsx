@@ -99,9 +99,10 @@ export default function ContactPage(): ReactElement {
                 Process Note
               </p>
               <p className="text-sm text-gray-500 leading-relaxed font-light italic">
-                &quot;Every project begins with a conversation. Please allow 1
-                hour for a studio response regarding bespoke commissions and
-                schedule availability.&quot;
+                &quot;Every project begins with a conversation. To ensure our
+                response isn't lost in spam filters, the studio will reach out
+                to you directly via WhatsApp. Please ensure you provide an
+                active WhatsApp number.&quot;
               </p>
             </div>
           </div>

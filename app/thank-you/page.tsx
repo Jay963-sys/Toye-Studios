@@ -15,7 +15,8 @@ export default function ThankYouPage() {
       </h1>
       <p className="text-white/60 max-w-md mx-auto mb-12 font-light leading-relaxed">
         Thank you for reaching out to Toye Studios. We have successfully
-        received your message and will be in touch with you shortly.
+        received your message and will be in touch with you via WhatsApp
+        shortly.
       </p>
 
       <Link

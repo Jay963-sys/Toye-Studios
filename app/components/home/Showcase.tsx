@@ -229,7 +229,7 @@ export default function Showcase(): ReactElement {
               </ul>
               <div className="pt-4">
                 <p className="text-xs font-mono text-gray-600 mb-6 uppercase tracking-widest">
-                  Commissions from £200 (Delivery inclusive)
+                  Commissions from £450 (Framing & Delivery inclusive)
                 </p>
                 <Link
                   href="/contact"
