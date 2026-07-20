@@ -100,7 +100,7 @@ export default function ContactPage(): ReactElement {
               </p>
               <p className="text-sm text-gray-500 leading-relaxed font-light italic">
                 &quot;Every project begins with a conversation. To ensure our
-                response isn't lost in spam filters, the studio will reach out
+                response is not lost in spam filters, the studio will reach out
                 to you directly via WhatsApp. Please ensure you provide an
                 active WhatsApp number.&quot;
               </p>
