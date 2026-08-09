@@ -1,3 +1,4 @@
+// app/contact/page.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -78,16 +79,27 @@ export default function ContactPage(): ReactElement {
           </motion.div>
         </div>
 
-        {/* 3. FORM & CONTEXT: MOVED UP FOR BETTER CONVERSIONS */}
+        {/* 3. FORM & CONTEXT */}
         <div className="grid lg:grid-cols-12 gap-20 items-start mb-24">
           {/* LEFT: FORM (8 Cols) */}
           <div className="lg:col-span-8">
-            <div className="mb-12">
+            <div className="mb-8">
               <h2 className="text-3xl font-serif italic text-white/90">
                 The Studio Form
               </h2>
               <div className="h-px w-12 bg-amber-500/40 mt-4" />
             </div>
+
+            {/* PRICE LINE — brief §1: visible directly above the first field */}
+            <div className="mb-10">
+              <p className="text-xl md:text-2xl font-light text-white">
+                Commissions from <span className="text-amber-500">£450</span>
+              </p>
+              <p className="text-sm text-gray-500 font-light mt-1">
+                Framed, mounted and delivered from the Basingstoke studio.
+              </p>
+            </div>
+
             <BookingForm />
           </div>
 
@@ -108,7 +120,7 @@ export default function ContactPage(): ReactElement {
           </div>
         </div>
 
-        {/* 4. CONTACT DIRECTORY & SOCIALS: MOVED TO BOTTOM */}
+        {/* 4. CONTACT DIRECTORY & SOCIALS */}
         <div className="border-t border-white/10 pt-16 mt-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             {CONTACT_METHODS.map((method, i) => (
@@ -133,7 +145,7 @@ export default function ContactPage(): ReactElement {
             ))}
           </div>
 
-          {/* Social Grid Moved to Bottom */}
+          {/* Social Grid */}
           <div className="space-y-6">
             <h4 className="text-[10px] font-mono text-white/20 uppercase tracking-[0.5em]">
               Digital Presence

@@ -1,6 +1,8 @@
+// app/components/BookingForm.tsx
 "use client";
 
 import React, { useEffect, useState, useRef, ReactElement } from "react";
+import { useRouter } from "next/navigation";
 
 declare global {
   interface Window {
@@ -11,6 +13,9 @@ declare global {
           portalId: string;
           formId: string;
           target: string;
+          onFormReady?: (form?: unknown) => void;
+          onFormSubmit?: (form?: unknown) => void;
+          onFormSubmitted?: (form?: unknown, data?: unknown) => void;
         }) => void;
       };
     };
@@ -22,19 +27,54 @@ type Props = {
   id?: string;
 };
 
+/**
+ * Internal name of the WhatsApp property in HubSpot.
+ * This MUST match the field's internal name exactly (check it in
+ * Settings → Properties, or the form editor). If HubSpot generated a
+ * different slug (e.g. "whatsapp_number_", "phone"), update this string.
+ * Keep it a SINGLE-LINE TEXT field, not a phone field — the phone field's
+ * country selector is what produces the broken "+4407..." numbers.
+ */
+const WHATSAPP_FIELD_NAME = "whatsapp_number";
+
+/**
+ * Normalize a UK WhatsApp number to a dialable format:
+ *   "07123 456789"  -> "+447123456789"
+ *   "44 7123 456789" -> "+447123456789"
+ *   "+44 7123 456789" -> "+447123456789"
+ * Anything already starting with "+" is left as-is (aside from spacing).
+ */
+function normalizeUKPhone(raw: string): string {
+  const cleaned = raw.replace(/[\s\-()]/g, "");
+  if (!cleaned) return cleaned;
+  if (cleaned.startsWith("+")) return cleaned;
+  if (cleaned.startsWith("0")) return "+44" + cleaned.slice(1);
+  if (cleaned.startsWith("44")) return "+" + cleaned;
+  return cleaned;
+}
+
 export default function BookingForm({
   className = "",
   id = "booking-form",
 }: Props): ReactElement {
   const [isLoaded, setIsLoaded] = useState(false);
   const formCreatedRef = useRef(false); // React lock to prevent double-rendering
+  const router = useRouter();
 
   useEffect(() => {
-    // Create a unique target ID so multiple forms don't collide
+    // Unique target ID so multiple forms don't collide
     const targetSelector = `#hubspot-wrapper-${id}`;
 
+    const getWhatsAppInput = (): HTMLInputElement | null => {
+      const wrapper = document.querySelector(targetSelector);
+      return (
+        wrapper?.querySelector<HTMLInputElement>(
+          `input[name="${WHATSAPP_FIELD_NAME}"]`,
+        ) ?? null
+      );
+    };
+
     const renderForm = () => {
-      // Only render if the lock is false
       if (!formCreatedRef.current && window.hbspt) {
         formCreatedRef.current = true; // Lock it immediately
 
@@ -43,9 +83,37 @@ export default function BookingForm({
           portalId: "148792981",
           formId: "2ab241b1-567e-4dbe-8a80-92fadd10f4ff",
           target: targetSelector,
-        });
 
-        setTimeout(() => setIsLoaded(true), 150);
+          // Form is in the DOM: hide the skeleton and wire up live normalization
+          onFormReady: () => {
+            setIsLoaded(true);
+            const input = getWhatsAppInput();
+            if (input) {
+              input.addEventListener("blur", () => {
+                const next = normalizeUKPhone(input.value);
+                if (next !== input.value) {
+                  input.value = next;
+                  // Let HubSpot / React register the programmatic change
+                  input.dispatchEvent(new Event("input", { bubbles: true }));
+                  input.dispatchEvent(new Event("change", { bubbles: true }));
+                }
+              });
+            }
+          },
+
+          // Safety net: normalize once more the instant before HubSpot serializes
+          onFormSubmit: () => {
+            const input = getWhatsAppInput();
+            if (input) input.value = normalizeUKPhone(input.value);
+          },
+
+          // Successful submit → send them to the thank-you page.
+          // NOTE: if your Meta "Lead" event is currently fired from inside
+          // onFormSubmitted, KEEP that call here, ABOVE the router.push.
+          onFormSubmitted: () => {
+            router.push("/thank-you");
+          },
+        });
       }
     };
 
@@ -67,18 +135,15 @@ export default function BookingForm({
       document.body.appendChild(script);
     }
 
-    // Cleanup function
+    // Cleanup
     return () => {
       formCreatedRef.current = false; // Release the lock on unmount
       const wrapper = document.querySelector(targetSelector);
-      if (wrapper) {
-        wrapper.innerHTML = ""; // Clear the div
-      }
-      if (existingScript) {
+      if (wrapper) wrapper.innerHTML = "";
+      if (existingScript)
         existingScript.removeEventListener("load", renderForm);
-      }
     };
-  }, [id]);
+  }, [id, router]);
 
   return (
     <div id={id} className={`relative w-full max-w-2xl ${className}`}>
@@ -107,10 +172,12 @@ export default function BookingForm({
         </div>
       )}
 
-      {/* HUBSPOT WRAPPER (Now with a unique ID based on props) */}
+      {/* HUBSPOT WRAPPER */}
       <div
         id={`hubspot-wrapper-${id}`}
-        className={`w-full relative z-20 transition-opacity duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+        className={`w-full relative z-20 transition-opacity duration-500 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
       />
     </div>
   );

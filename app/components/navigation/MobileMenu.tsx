@@ -11,6 +11,7 @@ const menuItems = [
   { name: "Photography", path: "/photography" },
   { name: "Teaching", path: "/teaching" },
   { name: "About", path: "/about" },
+  { name: "Rates", path: "/rates" },
   { name: "Contact", path: "/contact" },
 ];
 

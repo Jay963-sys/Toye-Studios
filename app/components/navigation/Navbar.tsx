@@ -65,15 +65,20 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-12">
             <div className="flex gap-12">
-              {["Artworks", "Photography", "Teaching", "About", "Contact"].map(
-                (item) => (
-                  <NavLink key={item} href={`/${item.toLowerCase()}`}>
-                    {item}
-                  </NavLink>
-                ),
-              )}
+              {[
+                "Artworks",
+                "Photography",
+                "Teaching",
+                "About",
+                "Rates",
+                "Contact",
+              ].map((item) => (
+                <NavLink key={item} href={`/${item.toLowerCase()}`}>
+                  {item}
+                </NavLink>
+              ))}
             </div>
-            <Clock /> 
+            <Clock />
           </div>
           {/* Mobile Menu Toggle - Custom Hamburger */}
           <button

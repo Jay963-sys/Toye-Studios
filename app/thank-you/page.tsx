@@ -1,30 +1,71 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+// app/thank-you/page.tsx
+"use client";
 
-export const metadata: Metadata = {
-  title: "Thank You | Toye Studios",
-  description: "Your inquiry has been successfully transmitted.",
-  robots: "noindex, nofollow", // Prevents Google from ranking this page so only real leads hit it
-};
+import { ReactElement } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 
-export default function ThankYouPage() {
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+const WHATSAPP_PREFILL =
+  "Hi Toye, I have just sent an enquiry through your website.";
+const WHATSAPP_URL = `https://wa.me/447823541627?text=${encodeURIComponent(
+  WHATSAPP_PREFILL,
+)}`;
+
+export default function ThankYouPage(): ReactElement {
+  const handleWhatsAppClick = () => {
+    // Meta Contact event (brief §3). Guarded so it never blocks the link.
+    if (typeof window !== "undefined" && typeof window.fbq === "function") {
+      window.fbq("track", "Contact");
+    }
+  };
+
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center">
-      <h1 className="text-4xl md:text-5xl font-light mb-6 tracking-wide text-white">
-        Inquiry Received.
-      </h1>
-      <p className="text-white/60 max-w-md mx-auto mb-12 font-light leading-relaxed">
-        Thank you for reaching out to Toye Studios. We have successfully
-        received your message and will be in touch with you via WhatsApp
-        shortly.
-      </p>
+    <section className="relative w-full min-h-screen bg-black text-white flex items-center py-32 px-4 md:px-12 overflow-hidden">
+      {/* BACKGROUND TEXTURE — matched to contact page */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.02)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
+      </div>
 
-      <Link
-        href="/"
-        className="text-[10px] font-mono uppercase tracking-[0.3em] text-amber-500 hover:text-white transition-colors border-b border-amber-500 hover:border-white pb-1"
-      >
-        Return to Home
-      </Link>
-    </div>
+      <div className="max-w-3xl mx-auto relative z-10">
+        <span className="text-[10px] uppercase tracking-[1em] text-amber-500/60 block mb-8">
+          Enquiry received
+        </span>
+
+        <h1 className="text-4xl md:text-6xl font-serif italic leading-tight tracking-tight mb-10">
+          Thank you. Your enquiry has{" "}
+          <span className="text-amber-500 not-italic font-light">
+            reached the studio.
+          </span>
+        </h1>
+
+        <div className="space-y-6 max-w-2xl mb-14">
+          <p className="text-lg text-gray-400 font-light leading-relaxed">
+            I read every enquiry personally and will reply within one working
+            day, usually by WhatsApp.
+          </p>
+          <p className="text-lg text-gray-400 font-light leading-relaxed">
+            If you have a photo ready, send it over and I will tell you honestly
+            whether it will make a strong drawing before you pay anything.
+          </p>
+        </div>
+
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleWhatsAppClick}
+          className="inline-flex items-center gap-3 px-10 py-4 bg-amber-500 text-black font-mono text-xs uppercase tracking-widest hover:bg-amber-400 transition-colors"
+        >
+          <FaWhatsapp className="text-lg" />
+          Send a photo on WhatsApp
+        </a>
+      </div>
+    </section>
   );
 }
