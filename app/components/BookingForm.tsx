@@ -28,22 +28,13 @@ type Props = {
 };
 
 /**
- * Internal name of the WhatsApp property in HubSpot.
- * This MUST match the field's internal name exactly (check it in
- * Settings → Properties, or the form editor). If HubSpot generated a
- * different slug (e.g. "whatsapp_number_", "phone"), update this string.
- * Keep it a SINGLE-LINE TEXT field, not a phone field — the phone field's
- * country selector is what produces the broken "+4407..." numbers.
+ * Internal name of the WhatsApp property in HubSpot. MUST match the field's
+ * internal name exactly (Settings -> Properties). Keep it a SINGLE-LINE TEXT
+ * field, not a phone field -- the phone field's country selector is what
+ * produces broken "+4407..." numbers.
  */
 const WHATSAPP_FIELD_NAME = "whatsapp_number";
 
-/**
- * Normalize a UK WhatsApp number to a dialable format:
- *   "07123 456789"  -> "+447123456789"
- *   "44 7123 456789" -> "+447123456789"
- *   "+44 7123 456789" -> "+447123456789"
- * Anything already starting with "+" is left as-is (aside from spacing).
- */
 function normalizeUKPhone(raw: string): string {
   const cleaned = raw.replace(/[\s\-()]/g, "");
   if (!cleaned) return cleaned;
@@ -58,25 +49,57 @@ export default function BookingForm({
   id = "booking-form",
 }: Props): ReactElement {
   const [isLoaded, setIsLoaded] = useState(false);
-  const formCreatedRef = useRef(false); // React lock to prevent double-rendering
+  const formCreatedRef = useRef(false);
   const router = useRouter();
 
   useEffect(() => {
-    // Unique target ID so multiple forms don't collide
     const targetSelector = `#hubspot-wrapper-${id}`;
+    let observer: MutationObserver | null = null;
+    let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const getWhatsAppInput = (): HTMLInputElement | null => {
-      const wrapper = document.querySelector(targetSelector);
-      return (
-        wrapper?.querySelector<HTMLInputElement>(
-          `input[name="${WHATSAPP_FIELD_NAME}"]`,
-        ) ?? null
+    const wireWhatsApp = (root: ParentNode | null) => {
+      const input = root?.querySelector<HTMLInputElement>(
+        `input[name="${WHATSAPP_FIELD_NAME}"]`,
       );
+      if (input && !input.dataset.waWired) {
+        input.dataset.waWired = "1";
+        input.addEventListener("blur", () => {
+          const next = normalizeUKPhone(input.value);
+          if (next !== input.value) {
+            input.value = next;
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+            input.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+        });
+      }
+    };
+
+    // Reveal as soon as HubSpot injects the actual form -- independent of
+    // whether the onFormReady callback fires.
+    const watchForForm = () => {
+      const wrapper = document.querySelector(targetSelector);
+      if (!wrapper) return;
+
+      const check = () => {
+        if (wrapper.querySelector("form, iframe")) {
+          setIsLoaded(true);
+          wireWhatsApp(wrapper);
+          return true;
+        }
+        return false;
+      };
+
+      if (check()) return;
+
+      observer = new MutationObserver(() => {
+        if (check()) observer?.disconnect();
+      });
+      observer.observe(wrapper, { childList: true, subtree: true });
     };
 
     const renderForm = () => {
       if (!formCreatedRef.current && window.hbspt) {
-        formCreatedRef.current = true; // Lock it immediately
+        formCreatedRef.current = true;
 
         window.hbspt.forms.create({
           region: "eu1",
@@ -84,36 +107,33 @@ export default function BookingForm({
           formId: "2ab241b1-567e-4dbe-8a80-92fadd10f4ff",
           target: targetSelector,
 
-          // Form is in the DOM: hide the skeleton and wire up live normalization
           onFormReady: () => {
+            console.debug("[hs] onFormReady");
             setIsLoaded(true);
-            const input = getWhatsAppInput();
-            if (input) {
-              input.addEventListener("blur", () => {
-                const next = normalizeUKPhone(input.value);
-                if (next !== input.value) {
-                  input.value = next;
-                  // Let HubSpot / React register the programmatic change
-                  input.dispatchEvent(new Event("input", { bubbles: true }));
-                  input.dispatchEvent(new Event("change", { bubbles: true }));
-                }
-              });
-            }
+            wireWhatsApp(document.querySelector(targetSelector));
           },
-
-          // Safety net: normalize once more the instant before HubSpot serializes
           onFormSubmit: () => {
-            const input = getWhatsAppInput();
+            console.debug("[hs] onFormSubmit");
+            const input = document
+              .querySelector(targetSelector)
+              ?.querySelector<HTMLInputElement>(
+                `input[name="${WHATSAPP_FIELD_NAME}"]`,
+              );
             if (input) input.value = normalizeUKPhone(input.value);
           },
-
-          // Successful submit → send them to the thank-you page.
-          // NOTE: if your Meta "Lead" event is currently fired from inside
-          // onFormSubmitted, KEEP that call here, ABOVE the router.push.
+          // NOTE: if your Meta "Lead" event fires here today, keep that call
+          // ABOVE the router.push. If the console never logs this line on a
+          // real submit, HubSpot's callbacks aren't firing for this form --
+          // set the /thank-you redirect in HubSpot's form options instead.
           onFormSubmitted: () => {
+            console.debug("[hs] onFormSubmitted");
             router.push("/thank-you");
           },
         });
+
+        watchForForm();
+        // Last-resort reveal so the skeleton can never trap the UI.
+        fallbackTimer = setTimeout(() => setIsLoaded(true), 4000);
       }
     };
 
@@ -135,9 +155,10 @@ export default function BookingForm({
       document.body.appendChild(script);
     }
 
-    // Cleanup
     return () => {
-      formCreatedRef.current = false; // Release the lock on unmount
+      formCreatedRef.current = false;
+      observer?.disconnect();
+      if (fallbackTimer) clearTimeout(fallbackTimer);
       const wrapper = document.querySelector(targetSelector);
       if (wrapper) wrapper.innerHTML = "";
       if (existingScript)
@@ -147,7 +168,6 @@ export default function BookingForm({
 
   return (
     <div id={id} className={`relative w-full max-w-2xl ${className}`}>
-      {/* SKELETON LOADER */}
       {!isLoaded && (
         <div className="absolute inset-0 w-full space-y-6 animate-pulse z-10">
           <div className="space-y-2">
@@ -172,7 +192,6 @@ export default function BookingForm({
         </div>
       )}
 
-      {/* HUBSPOT WRAPPER */}
       <div
         id={`hubspot-wrapper-${id}`}
         className={`w-full relative z-20 transition-opacity duration-500 ${
