@@ -1,7 +1,7 @@
 // app/thank-you/page.tsx
 "use client";
 
-import { ReactElement } from "react";
+import { useEffect, ReactElement } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
 declare global {
@@ -17,8 +17,21 @@ const WHATSAPP_URL = `https://wa.me/447823541627?text=${encodeURIComponent(
 )}`;
 
 export default function ThankYouPage(): ReactElement {
+  // Fire the Meta "Lead" event once, on arrival.
+  // Reaching this page means the form submitted successfully, so this is the
+  // reliable place to count a Lead -- no Event Setup Tool, no button-click rule,
+  // no dependence on HubSpot callbacks. Keep Lead ONLY here so it can't
+  // double-count. The sessionStorage guard stops a refresh re-firing it.
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.fbq !== "function")
+      return;
+    if (sessionStorage.getItem("toye_lead_sent")) return;
+    window.fbq("track", "Lead");
+    sessionStorage.setItem("toye_lead_sent", "1");
+  }, []);
+
   const handleWhatsAppClick = () => {
-    // Meta Contact event (brief §3). Guarded so it never blocks the link.
+    // Meta "Contact" event on the WhatsApp click (brief section 3).
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Contact");
     }
@@ -26,7 +39,7 @@ export default function ThankYouPage(): ReactElement {
 
   return (
     <section className="relative w-full min-h-screen bg-black text-white flex items-center py-32 px-4 md:px-12 overflow-hidden">
-      {/* BACKGROUND TEXTURE — matched to contact page */}
+      {/* BACKGROUND TEXTURE -- matched to contact page */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.02)_0%,transparent_50%)]" />
         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
