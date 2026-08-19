@@ -6,7 +6,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 declare global {
   interface Window {
-    dataLayer?: Record<string, unknown>[];
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -17,24 +17,35 @@ const WHATSAPP_URL = `https://wa.me/447823541627?text=${encodeURIComponent(
 )}`;
 
 export default function ThankYouPage(): ReactElement {
-  // Push a dataLayer event on arrival. Reaching this page means the form
-  // submitted successfully, so GTM can fire the Meta "Lead" tag off this event.
-  // This is reliable on the client-side redirect (router.push) where a GTM
-  // URL / PageView trigger would silently miss the navigation.
-  // The sessionStorage guard stops a refresh re-firing it.
+  // Fire the Meta "Lead" event on arrival with a fallback timer
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    // 1. Guard against double-counting on refresh
     if (sessionStorage.getItem("toye_lead_sent")) return;
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: "lead_submitted" });
-    sessionStorage.setItem("toye_lead_sent", "1");
+
+    // 2. The function that actually fires the event
+    const fireLeadEvent = () => {
+      if (typeof window !== "undefined" && typeof window.fbq === "function") {
+        window.fbq("track", "Lead");
+        sessionStorage.setItem("toye_lead_sent", "1");
+        console.log("🔥 Meta Lead event fired!");
+      }
+    };
+
+    // 3. Race Condition Fix: Check if ready. If not, wait 1 second and try again.
+    if (typeof window !== "undefined") {
+      if (typeof window.fbq === "function") {
+        fireLeadEvent();
+      } else {
+        setTimeout(fireLeadEvent, 1000);
+      }
+    }
   }, []);
 
   const handleWhatsAppClick = () => {
-    // GTM fires the Meta "Contact" tag off this event (brief section 3).
-    if (typeof window === "undefined") return;
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: "contact_click" });
+    // Fire the Meta "Contact" event directly
+    if (typeof window !== "undefined" && typeof window.fbq === "function") {
+      window.fbq("track", "Contact");
+    }
   };
 
   return (
